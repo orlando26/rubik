@@ -1,0 +1,25 @@
+#header{
+    height: 10vh;
+    margin: 0!important;
+    padding: 0!important;
+    border: 0 !important;
+}
+
+#content{
+    height: 80vh;
+    margin: 0!important;
+    padding: 0!important;
+    border: 0 !important;
+}
+
+#footer{
+    height: 10vh;
+    margin: 0!important;
+    padding: 0!important;
+    border: 0 !important;
+}
+
+#rubik{
+    margin-top:20px;
+    margin-left: 20px;
+}
