@@ -6,6 +6,15 @@
 *
 */
 
+var FACES = {
+        front : ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
+        back : ["green","green","green","green","green","green","green","green","green"],
+        up : ["yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow",],
+        down : ["white","white","white","white","white","white","white","white","white",],
+        left : ["red","red","red","red","red","red","red","red","red",],
+        right : ["orange","orange","orange","orange","orange","orange","orange","orange","orange",]
+    };
+
 YUI.add('rubik-queue', function (Y) {
 
     Queue = function (config) {
@@ -167,15 +176,6 @@ YUI.add('rubik', function (Y) {
         "down":["dtl", "dcl", "dbl", "dtc", "dcc", "dbc", "dtr", "dcr", "dbr"],
         "left":["ltl", "lcl", "lbl", "ltc", "lcc", "lbc", "ltr", "lcr", "lbr"],
         "right":["rtl", "rcl", "rbl", "rtc", "rcc", "rbc", "rtr", "rcr", "rbr"]
-    };
-    
-    var FACES = {
-        front : ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
-        back : ["green","green","green","green","green","green","green","green","green"],
-        up : ["yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow",],
-        down : ["white","white","white","white","white","white","white","white","white",],
-        left : ["red","red","red","red","red","red","red","red","red",],
-        right : ["orange","orange","orange","orange","orange","orange","orange","orange","orange",]
     };
     
     function Rubik (cfg) {

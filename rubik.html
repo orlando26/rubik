@@ -13,41 +13,11 @@
     <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
     <script src="js/rubik.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/scripts.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
 <body>
-    <div data-role="page" id="page1">
-
-	<div data-role="header">
-		<h1>Foo</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">
-		<div id="face">
-            <div id="s0" class="square"></div>
-            <div id="s3" class="square"></div>
-            <div id="s6" class="square"></div>
-            
-            <div id="s1" class="square"></div>
-            <div id="s4" class="square"></div>
-            <div id="s7" class="square"></div>
-            
-            <div id="s2" class="square"></div>
-            <div id="s5" class="square"></div>
-            <div id="s8" class="square"></div>
-            
-        </div>
-        <button id="statebtn">save state</button>
-		<a href="#page2" onclick="$('#rubik').show();">rubik</a>
-	</div><!-- /content -->
-
-	<div data-role="footer">
-		<h4>Page Footer</h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
-    <div data-role="page" id="page2">
+    <div data-role="page" id="rubik">
 
         <div id="header" data-role="header">
             <h1>Rubik</h1>
@@ -55,7 +25,7 @@
         <!-- /header -->
 
         <div id="content" role="main" class="ui-content">
-            <section id="rubik" style="display:none">
+            <section id="rubik">
                 <div id="cube-container">
                     <div id="cube-viewport">
                         <div id="cube">
@@ -292,7 +262,10 @@
     <!-- /page -->
 
     <script>
-       
+        YUI().use('rubik',function(Y){
+    var cube = window.cube = new Y.Rubik();
+    cube.run();    
+});
     </script>
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -304,7 +277,6 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
     </script>
 </body>
 

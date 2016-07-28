@@ -23,3 +23,18 @@
     margin-top:20px;
     margin-left: 20px;
 }
+
+#face{
+    margin: auto;
+    width: 50vh;
+    height: 50vh;
+    border: 5px black;
+}
+
+.square{
+    float: left;
+    height: 32%;
+    width: 32%;
+    border: solid black 1px;
+    background: blue;
+}
