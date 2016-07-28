@@ -6,7 +6,7 @@
 *
 */
 
-YUI.add('node','rubik-queue', function (Y) {
+YUI.add('rubik-queue', function (Y) {
 
     Queue = function (config) {
         config = config || {};
@@ -161,12 +161,21 @@ YUI.add('rubik', function (Y) {
       
     //Match the sides with css .class
     var INIT_CONFIG = {
-        "front":"blue",
-        "back":"green",
-        "up":"red",
-        "down":"white",
-        "left":"orange",
-        "right":"yellow"
+        "front":["ftl", "fcl", "fbl", "ftc", "fcc", "fbc", "ftr", "fcr", "fbr"],
+        "back":["btl", "bcl", "bbl", "btc", "bcc", "bbc", "btr", "bcr", "bbr"],
+        "up":["utl", "ucl", "ubl", "utc", "ucc", "ubc", "utr", "ucr", "ubr"],
+        "down":["dtl", "dcl", "dbl", "dtc", "dcc", "dbc", "dtr", "dcr", "dbr"],
+        "left":["ltl", "lcl", "lbl", "ltc", "lcc", "lbc", "ltr", "lcr", "lbr"],
+        "right":["rtl", "rcl", "rbl", "rtc", "rcc", "rbc", "rtr", "rcr", "rbr"]
+    };
+    
+    var FACES = {
+        front : ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
+        back : ["green","green","green","green","green","green","green","green","green"],
+        up : ["yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow","yellow",],
+        down : ["white","white","white","white","white","white","white","white","white",],
+        left : ["red","red","red","red","red","red","red","red","red",],
+        right : ["orange","orange","orange","orange","orange","orange","orange","orange","orange",]
     };
     
     function Rubik (cfg) {
@@ -293,7 +302,15 @@ YUI.add('rubik', function (Y) {
         },
         _setInitialColors: function (){
             for(var face in INIT_CONFIG){
-                Y.all('.' +face + ' > div').addClass(INIT_CONFIG[face]);
+                Y.one('.'+ INIT_CONFIG[face][0] +'.' + face + ' > div').addClass(FACES[face][0]);
+                Y.one('.'+ INIT_CONFIG[face][1] +'.' + face + ' > div').addClass(FACES[face][1]);
+                Y.one('.'+ INIT_CONFIG[face][2] +'.' + face + ' > div').addClass(FACES[face][2]);
+                Y.one('.'+ INIT_CONFIG[face][3] +'.' + face + ' > div').addClass(FACES[face][3]);
+                Y.one('.'+ INIT_CONFIG[face][4] +'.' + face + ' > div').addClass(FACES[face][4]);
+                Y.one('.'+ INIT_CONFIG[face][5] +'.' + face + ' > div').addClass(FACES[face][5]);
+                Y.one('.'+ INIT_CONFIG[face][6] +'.' + face + ' > div').addClass(FACES[face][6]);
+                Y.one('.'+ INIT_CONFIG[face][7] +'.' + face + ' > div').addClass(FACES[face][7]);
+                Y.one('.'+ INIT_CONFIG[face][8] +'.' + face + ' > div').addClass(FACES[face][8]);
             }
         },
         _endTransition: function (evt) {
