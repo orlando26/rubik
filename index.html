@@ -2,29 +2,32 @@
 <html>
 
 <head>
-    <title>HTML5 Rubik's cube (CSS3 + JS)</title>
-
+    <title>Cubbot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8" />
 
-    <link rel="stylesheet" href="css/styles.css"></link>
-    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"></link>
+
     <link rel="stylesheet" href="css/rubik.css"></link>
-    <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
-    <script src="js/rubik.js"></script>
-    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/styles.css"></link>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
+    <script src="js/rubik-simple.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    
+
 </head>
 
 <body>
-    <div data-role="page" id="page1">
+    <div data-role="page" id="main">
 
-	<div data-role="header">
-		<h1>Foo</h1>
+	<div data-role="header" class="header">
+		<h1>Cubbot</h1>
+        
 	</div><!-- /header -->
 
-	<div role="main" class="ui-content">
+	<div role="main" class="ui-content content">
+        <h3 style="text-align:center;margin-top:5px" id="face-name">Front Face</h3>
 		<div id="face">
             <div id="s0" class="square"></div>
             <div id="s3" class="square"></div>
@@ -39,23 +42,20 @@
             <div id="s8" class="square"></div>
             
         </div>
-        <button id="statebtn">save state</button>
-		<a href="#page2" onclick="$('#rubik').show();">rubik</a>
-	</div><!-- /content -->
+        <button id="statebtn">next face</button>
+		<a id="rubik-link" href="#rubik-page" onclick="$('#rubik').show();"><h1 style="text-align:center">see rubik</h1></a>
+	    
+    </div><!-- /content -->
 
-	<div data-role="footer">
-		<h4>Page Footer</h4>
+	<div data-role="footer" class="footer">
+		<h1>By Lucero, Meli y Orlando</h1>
 	</div><!-- /footer -->
-</div><!-- /page -->
-    <div data-role="page" id="page2">
+</div>
 
-        <div id="header" data-role="header">
-            <h1>Rubik</h1>
-        </div>
-        <!-- /header -->
-
-        <div id="content" role="main" class="ui-content">
-            <section id="rubik" style="display:none">
+    <div id="rubik-page" data-role="page">
+        <div class="header" data-role="header"><h1>Cubbot</h1></div>
+        <div role="main" class="ui-content content">
+            <section id="rubik">
                 <div id="cube-container">
                     <div id="cube-viewport">
                         <div id="cube">
@@ -261,51 +261,16 @@
                     </div>
                 </div>
 
-                <aside style="float:right;">
-                    <section id="main">
-                        <div id="cube-controls">
-                            <ul>
-                                <li>
-                                    <div class="undo"><a>undo</a></div>
-                                </li>
-                                <li>
-                                    <div class="redo"><a>redo</a></div>
-                                </li>
-                                <li>
-                                    <div class="solve"><a>solve</a></div>
-                                </li>
-                                <li id="rotation">
-                                    <div class="rotate"><a>rotate</a></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </aside>
             </section>
+            <button id="girarTest" style="width:300px;float:right;">solve</button>
         </div>
-        <!-- /content -->
-
-        <div id="footer" data-role="footer">
+        <div class="footer" data-role="footer">
+            <h1>By Lucero, Meli y Orlando</h1>
         </div>
-        <!-- /footer -->
     </div>
-    <!-- /page -->
 
-    <script>
-       
-    </script>
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-32149285-1']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
 
-    </script>
 </body>
 
 </html>

@@ -1,18 +1,18 @@
-#header{
+.header{
     height: 10vh;
     margin: 0!important;
     padding: 0!important;
     border: 0 !important;
 }
 
-#content{
+.content{
     height: 80vh;
     margin: 0!important;
     padding: 0!important;
     border: 0 !important;
 }
 
-#footer{
+.footer{
     height: 10vh;
     margin: 0!important;
     padding: 0!important;
@@ -37,4 +37,11 @@
     width: 32%;
     border: solid black 1px;
     background: blue;
+    cursor: pointer;
+}
+
+#rubik-link{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
 }
