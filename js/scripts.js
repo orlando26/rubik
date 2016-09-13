@@ -28,6 +28,14 @@ $(function() {
         }
     });
     
+     $( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
+     $('.square').droppable({
+         drop: function(event, ui){
+            console.log($(ui.draggable).css('background'));   
+            $(this).css('background-color', $(ui.draggable).css('background-color'));
+         }
+     });
+    
     $('#girarTest').click(function(){
         var simpleFormMoves = [
             "R'", "D'", "R", "D"
@@ -60,11 +68,11 @@ $(function() {
         } else if (face == 'left') {
             face = 'up';
             $('#face-name').text("Up Face")
-            $('.square').css('background-color', yellow);
+            $('.square').css('background-color', white);
         } else if (face == 'up') {
             face = 'down';
             $('#face-name').text("Bottom Face")
-            $('.square').css('background-color', white);
+            $('.square').css('background-color', yellow);
         } else if (face == 'down') {
             face = 'back';
             $('#face-name').text("Back Face")

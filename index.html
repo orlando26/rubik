@@ -9,51 +9,66 @@
     <link rel="stylesheet" href="css/rubik.css"></link>
     <link rel="stylesheet" href="css/styles.css"></link>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
     <script src="js/rubik-simple.js"></script>
     <script src="js/scripts.js"></script>
-    
+
 
 </head>
 
 <body>
     <div data-role="page" id="main">
 
-	<div data-role="header" class="header">
-		<h1>Cubbot</h1>
-        
-	</div><!-- /header -->
+        <div data-role="header" class="header">
+            <h1>Cubbot</h1>
 
-	<div role="main" class="ui-content content">
-        <h3 style="text-align:center;margin-top:5px" id="face-name">Front Face</h3>
-		<div id="face">
-            <div id="s0" class="square"></div>
-            <div id="s3" class="square"></div>
-            <div id="s6" class="square"></div>
-            
-            <div id="s1" class="square"></div>
-            <div id="s4" class="square"></div>
-            <div id="s7" class="square"></div>
-            
-            <div id="s2" class="square"></div>
-            <div id="s5" class="square"></div>
-            <div id="s8" class="square"></div>
-            
         </div>
-        <button id="statebtn">next face</button>
-		<a id="rubik-link" href="#rubik-page" onclick="$('#rubik').show();"><h1 style="text-align:center">see rubik</h1></a>
-	    
-    </div><!-- /content -->
+        <!-- /header -->
 
-	<div data-role="footer" class="footer">
-		<h1>By Lucero, Meli y Orlando</h1>
-	</div><!-- /footer -->
-</div>
+        <div role="main" class="ui-content content">
+            <h3 style="text-align:center;margin-top:5px" id="face-name">Front Face</h3>
+            <div id="face">
+                <div id="s0" class="square"></div>
+                <div id="s3" class="square"></div>
+                <div id="s6" class="square"></div>
+
+                <div id="s1" class="square"></div>
+                <div id="s4" class="square"></div>
+                <div id="s7" class="square"></div>
+
+                <div id="s2" class="square"></div>
+                <div id="s5" class="square"></div>
+                <div id="s8" class="square"></div>
+
+            </div>
+
+            <div id="color-pickers-tab">
+                <div id="color-picker-blue" class="color-picker" style="background:blue;"></div>
+                <div id="color-picker-orange" class="color-picker" style="background:orange;"></div>
+                <div id="color-picker-red" class="color-picker" style="background:red;"></div>
+                <div id="color-picker-white" class="color-picker" style="background:white;"></div>
+                <div id="color-picker-yellow" class="color-picker" style="background:yellow;"></div>
+                <div id="color-picker-green" class="color-picker" style="background:rgb(0,255,0);"></div>
+            </div>
+            <button id="statebtn">next face</button>
+            <a id="rubik-link" href="#rubik-page" onclick="$('#rubik').show();"><h1 style="text-align:center">see rubik</h1></a>
+
+        </div>
+        <!-- /content -->
+
+        <div data-role="footer" class="footer">
+            <h1>By Lucero, Meli y Orlando</h1>
+        </div>
+        <!-- /footer -->
+    </div>
 
     <div id="rubik-page" data-role="page">
-        <div class="header" data-role="header"><h1>Cubbot</h1></div>
+        <div class="header" data-role="header">
+            <h1>Cubbot</h1></div>
         <div role="main" class="ui-content content">
             <section id="rubik">
                 <div id="cube-container">
