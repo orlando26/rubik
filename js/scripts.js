@@ -8,6 +8,7 @@ var cube;
 
 var face = 'front';
 $(function() {
+    init();
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
             var currentColor = $(this).css('background-color');
@@ -29,10 +30,13 @@ $(function() {
     });
     
      $( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
+     
      $('.square').droppable({
          drop: function(event, ui){
-            console.log($(ui.draggable).css('background'));   
-            $(this).css('background-color', $(ui.draggable).css('background-color'));
+             event.preventDefault();
+            if ($(this).attr('class') != 'square center ui-droppable'){
+                $(this).css('background-color', $(ui.draggable).css('background-color'));
+            }  
          }
      });
     
@@ -41,9 +45,7 @@ $(function() {
             "R'", "D'", "R", "D"
         ];
         
-        var movements = [
-            getMovement("R'"), getMovement("D'"), getMovement("R"), getMovement("D")
-            ]
+        var movements = makeMovementsArray(simpleFormMoves);
         cube._solve(movements);
     });
 
@@ -142,6 +144,39 @@ function getMovement(move){
            break;
     }
     return movement;
+}
+
+function makeMovementsArray(array){
+    var movementsArray = [];
+    array.forEach(function(element){
+       var move = getMovement(element);
+       movementsArray.push(move); 
+    });
+    return movementsArray;
+}
+
+function touchHandler(event) {
+    var touch = event.changedTouches[0];
+
+    var simulatedEvent = document.createEvent("MouseEvent");
+        simulatedEvent.initMouseEvent({
+        touchstart: "mousedown",
+        touchmove: "mousemove",
+        touchend: "mouseup"
+    }[event.type], true, true, window, 1,
+        touch.screenX, touch.screenY,
+        touch.clientX, touch.clientY, false,
+        false, false, false, 0, null);
+
+    touch.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
+
+function init() {
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);
 }
 
 
