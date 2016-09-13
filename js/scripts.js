@@ -29,8 +29,13 @@ $(function() {
     });
     
     $('#girarTest').click(function(){
-        var movements = [getMovement("R'"), getMovement("D'"), getMovement("R"), getMovement("D")]
-        console.log(movements[0]);
+        var simpleFormMoves = [
+            "R'", "D'", "R", "D"
+        ];
+        
+        var movements = [
+            getMovement("R'"), getMovement("D'"), getMovement("R"), getMovement("D")
+            ]
         cube._solve(movements);
     });
 
@@ -131,16 +136,5 @@ function getMovement(move){
     return movement;
 }
 
-function doMovement(shortNameMovement){
-    cube._expectingTransition = true;
-     cube._doMovement(getMovement(shortNameMovement));
-}
 
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
 
