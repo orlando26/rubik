@@ -36,7 +36,7 @@
     height: 32%;
     width: 32%;
     border: solid black 1px;
-    background: blue;
+    background: rgb(0,255,0);
     cursor: pointer;
 }
 

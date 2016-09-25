@@ -1,12 +1,12 @@
 var FACES = {
-    front: ["blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue"],
-    back: ["green", "green", "green", "green", "green", "green", "green", "green", "green"],
-    up: ["yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow",],
-    down: ["white", "white", "white", "white", "white", "white", "white", "white", "white",],
-    left: ["red", "red", "red", "red", "red", "red", "red", "red", "red",],
-    right: ["orange", "orange", "orange", "orange", "orange", "orange", "orange", "orange", "orange",]
+    front: {M:"blue", p:"blue", P:"blue", m:"blue", CF:"blue", o:"blue", N:"blue", n:"blue", O:"blue"},
+    back: {E:"green", h:"green", H:"green", e:"green", CB:"green", g:"green", F:"green", f:"green", G:"green"},
+    up: {C:"yellow", b:"yellow", B:"yellow", c:"yellow", CU:"yellow", a:"yellow", D:"yellow", d:"yellow", A:"yellow",},
+    down: {U:"white", x:"white", X:"white", u:"white", CD:"white", w:"white", V:"white", v:"white", W:"white",},
+    left: {I:"red", l:"red", L:"red", i:"red", CL:"red", k:"red", J:"red", j:"red", K:"red",},
+    right: {Q:"orange", t:"orange", T:"orange", q:"orange", CR:"orange", s:"orange", R:"orange", r:"orange", S:"orange",}
 };
-var array = [1, 2, 3, 4, 5];
+
 YUI.add('rubik-simple', function(Y) {
     /*
     * This is a map for the cubies movements.
@@ -176,15 +176,19 @@ YUI.add('rubik-simple', function(Y) {
         },
         _setInitialColors: function() {
             for (var face in INIT_CONFIG) {
-                Y.one('.' + INIT_CONFIG[face][0] + '.' + face + ' > div').addClass(FACES[face][0]);
-                Y.one('.' + INIT_CONFIG[face][1] + '.' + face + ' > div').addClass(FACES[face][1]);
-                Y.one('.' + INIT_CONFIG[face][2] + '.' + face + ' > div').addClass(FACES[face][2]);
-                Y.one('.' + INIT_CONFIG[face][3] + '.' + face + ' > div').addClass(FACES[face][3]);
-                Y.one('.' + INIT_CONFIG[face][4] + '.' + face + ' > div').addClass(FACES[face][4]);
-                Y.one('.' + INIT_CONFIG[face][5] + '.' + face + ' > div').addClass(FACES[face][5]);
-                Y.one('.' + INIT_CONFIG[face][6] + '.' + face + ' > div').addClass(FACES[face][6]);
-                Y.one('.' + INIT_CONFIG[face][7] + '.' + face + ' > div').addClass(FACES[face][7]);
-                Y.one('.' + INIT_CONFIG[face][8] + '.' + face + ' > div').addClass(FACES[face][8]);
+                var faceArr = [];
+                for(var key in FACES[face]){
+                    faceArr.push(FACES[face][key]);    
+                }
+                Y.one('.' + INIT_CONFIG[face][0] + '.' + face + ' > div').addClass(faceArr[0]);
+                Y.one('.' + INIT_CONFIG[face][1] + '.' + face + ' > div').addClass(faceArr[1]);
+                Y.one('.' + INIT_CONFIG[face][2] + '.' + face + ' > div').addClass(faceArr[2]);
+                Y.one('.' + INIT_CONFIG[face][3] + '.' + face + ' > div').addClass(faceArr[3]);
+                Y.one('.' + INIT_CONFIG[face][4] + '.' + face + ' > div').addClass(faceArr[4]);
+                Y.one('.' + INIT_CONFIG[face][5] + '.' + face + ' > div').addClass(faceArr[5]);
+                Y.one('.' + INIT_CONFIG[face][6] + '.' + face + ' > div').addClass(faceArr[6]);
+                Y.one('.' + INIT_CONFIG[face][7] + '.' + face + ' > div').addClass(faceArr[7]);
+                Y.one('.' + INIT_CONFIG[face][8] + '.' + face + ' > div').addClass(faceArr[8]);
             }
         },
         _endTransition: function(evt) {
