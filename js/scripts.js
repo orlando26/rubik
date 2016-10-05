@@ -34,7 +34,7 @@ $(function() {
      
      $('.square').droppable({
          drop: function(event, ui){
-             event.preventDefault();
+             //event.preventDefault();
             if ($(this).attr('class') != 'square center ui-droppable'){
                 $(this).css('background-color', $(ui.draggable).css('background-color'));
             }  
