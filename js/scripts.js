@@ -9,7 +9,7 @@ var a='a',A='A', b='b',B='B', c='c',C='C', d='d',D='D', e='e', E='E', f='f', F='
 var s0=M, s1=p, s2=P, s3=m,s4='CF', s5=o, s6=N, s7=n, s8=O;
 var face = 'front';
 $(function() {
-    init();
+    //init();
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
             var currentColor = $(this).css('background-color');

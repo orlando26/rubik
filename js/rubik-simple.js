@@ -9,17 +9,6 @@ var FACES = {
 
 YUI.add('rubik-simple', function(Y) {
     /*
-    * This is a map for the cubies movements.
-    * When the cube rotates in a certain way we have move his position on the cube.
-    * Every cubie represent a css class which contains his transformation in 3D
-    * Example:
-    * When we rotate the left side of the cube clockwise,
-    * which is the movement "M" in the left part => LM-left).
-    * The cubie which is on the upper side, on the top left corner ("utl"), after the Left side movement
-    * goes to the bottom side in the same position ("btl").
-    * So on LM-left, "utl" => "btl"
-    * Where "utl" class is .utl {-webkit-transform:rotateX(90deg)   translate3d(50px,-100px,0)}
-    * and "btl" class is:  .btl {-webkit-transform:rotateX(-180deg) translate3d(50px,-250px,150px)}
     *
     */
     var CUBIE_MOVEMENTS = {
@@ -117,7 +106,7 @@ YUI.add('rubik-simple', function(Y) {
         }
     };
 
-    //Match the sides with css .class
+    //Asigna las clases de css correspondientes a cada cara 
     var INIT_CONFIG = {
         "front": ["ftl", "fcl", "fbl", "ftc", "fcc", "fbc", "ftr", "fcr", "fbr"],
         "back": ["btl", "bcl", "bbl", "btc", "bcc", "bbc", "btr", "bcr", "bbr"],

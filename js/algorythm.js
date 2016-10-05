@@ -3,7 +3,7 @@
  */
 
 /* Funcion que regresa la letra perteneciente a la misma pieza */
-function belonging(letter){
+function perteneciente(letter){
     var belonging;
     switch(letter){
         case 'a':belonging = 'm';break;
@@ -30,6 +30,7 @@ function belonging(letter){
         case 'v':belonging = 's';break;
         case 'w':belonging = 'g';break;
         case 'x':belonging = 'k';break;
+        
     }
     return belonging;
 }
