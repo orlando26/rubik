@@ -163,7 +163,7 @@ function makeMovementsArray(array){
     return movementsArray;
 }
 
-function touchHandler(event) {
+/*function touchHandler(event) {
     var touch = event.changedTouches[0];
 
     var simulatedEvent = document.createEvent("MouseEvent");
@@ -178,14 +178,14 @@ function touchHandler(event) {
 
     touch.target.dispatchEvent(simulatedEvent);
     event.preventDefault();
-}
+}*/
 
-function init() {
+/*function init() {
     document.addEventListener("touchstart", touchHandler, true);
     document.addEventListener("touchmove", touchHandler, true);
     document.addEventListener("touchend", touchHandler, true);
     document.addEventListener("touchcancel", touchHandler, true);
-}
+}*/
 
 function getColorOf(letter){
     var color;
