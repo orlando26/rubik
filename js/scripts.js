@@ -5,6 +5,7 @@ var blue = "rgb(0, 0, 255)";
 var white = "rgb(255, 255, 255)";
 var orange = "rgb(255, 165, 0)";
 var cube;
+var colorPicker;
 var a='a',A='A', b='b',B='B', c='c',C='C', d='d',D='D', e='e', E='E', f='f', F='F', g='g', G='G', h='h', H='H', i='i', I='I', j='j', J='J', k='k', K='K', l='l', L='L',  m='m', M='M', n='n', N='N', o='o', O='O', p='p', P='P', q='q', Q='Q', r='r', R='R', s='s', S='S', t='t', T='T', u='u', U='U',v='v',V='V',w='w',W='W', x='x', X='X';
 var s0=M, s1=p, s2=P, s3=m,s4='CF', s5=o, s6=N, s7=n, s8=O;
 var face = 'front';
@@ -12,7 +13,7 @@ $(function() {
     //init();
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
-            var currentColor = $(this).css('background-color');
+            /*var currentColor = $(this).css('background-color');
             currentColor = currentColor.toString();
             if (currentColor == blue) {
                 $(this).css('background-color', green);
@@ -26,11 +27,16 @@ $(function() {
                 $(this).css('background-color', white);
             } else if (currentColor == white) {
                 $(this).css('background-color', blue);
-            }
+            }*/
+            $(this).css('background-color', colorPicker);
         }
     });
     
-     $( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
+     $( ".color-picker" ).draggable(
+         { opacity: 0.7, helper: "clone" }
+         ).click(function(){
+             colorPicker = $(this).css('background-color');
+         });
      
      $('.square').droppable({
          drop: function(event, ui){
@@ -52,6 +58,7 @@ $(function() {
     });
 
     $('#statebtn').click(function() {
+        Android.showToast("hola");
         FACES[face][s0] = getColor($('#s0').css('background-color').toString());
         FACES[face][s1] = getColor($('#s1').css('background-color').toString());
         FACES[face][s2] = getColor($('#s2').css('background-color').toString());
@@ -66,15 +73,11 @@ $(function() {
             face = 'right';
             $('#face-name').text("Right Face")
             $('.square').css('background-color', red);
-            $('.header').css('background-color', red);
-            $('.footer').css('background-color', red);
             s0=Q;s1=t;s2=T;s3=q;s4='CR';s5=s;s6=R;s7=r;s8=S;
         } else if (face == 'right') {
             face = 'left';
             $('#face-name').text("Left Face")
             $('.square').css('background-color', orange);
-            $('.header ui-header ui-bar-inherit').css('background-color', orange);
-            $('.footer').css('background-color', orange);
             s0=I;s1=l;s2=L;s3=i;s4='CL';s5=k;s6=J;s7=j;s8=K;
         } else if (face == 'left') {
             face = 'up';

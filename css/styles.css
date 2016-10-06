@@ -53,10 +53,10 @@
 }
 
 .color-picker{
-    margin-left: 1vw;
-    margin-right: 1vw;
-    border: 1px black solid; 
-    float:left;
-    height: 5vh;
-    width: 8vw;
+    margin-left: 1vw !important;
+    margin-right: 1vw !important;
+    border: 1px black solid !important; 
+    float:left !important;
+    height: 5vh !important;
+    width: 8vw !important;
 }
