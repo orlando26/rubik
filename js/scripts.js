@@ -30,16 +30,16 @@ $(function() {
         }
     });
     
-     /*$( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
+     $( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
      
      $('.square').droppable({
          drop: function(event, ui){
-             //event.preventDefault();
+             event.preventDefault();
             if ($(this).attr('class') != 'square center ui-droppable'){
                 $(this).css('background-color', $(ui.draggable).css('background-color'));
             }  
          }
-     });*/
+     });
     
     $('#girarTest').click(function(){
         console.log(getColorOf(a));
