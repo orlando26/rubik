@@ -325,7 +325,6 @@ YUI.add('rubik-simple', function(Y) {
             if (movement && movement.face != "C") {
                 this._doMovement(movement);
                 console.log(cubeMove);
-                console.log(movement);
             }
 
         },
