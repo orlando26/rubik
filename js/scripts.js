@@ -30,7 +30,7 @@ $(function() {
         }
     });
     
-     $( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
+     /*$( ".color-picker" ).draggable({ opacity: 0.7, helper: "clone" });
      
      $('.square').droppable({
          drop: function(event, ui){
@@ -39,7 +39,7 @@ $(function() {
                 $(this).css('background-color', $(ui.draggable).css('background-color'));
             }  
          }
-     });
+     });*/
     
     $('#girarTest').click(function(){
         console.log(getColorOf(a));
@@ -66,11 +66,15 @@ $(function() {
             face = 'right';
             $('#face-name').text("Right Face")
             $('.square').css('background-color', red);
+            $('.header').css('background-color', red);
+            $('.footer').css('background-color', red);
             s0=Q;s1=t;s2=T;s3=q;s4='CR';s5=s;s6=R;s7=r;s8=S;
         } else if (face == 'right') {
             face = 'left';
             $('#face-name').text("Left Face")
             $('.square').css('background-color', orange);
+            $('.header ui-header ui-bar-inherit').css('background-color', orange);
+            $('.footer').css('background-color', orange);
             s0=I;s1=l;s2=L;s3=i;s4='CL';s5=k;s6=J;s7=j;s8=K;
         } else if (face == 'left') {
             face = 'up';
