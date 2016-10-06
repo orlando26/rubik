@@ -13,21 +13,7 @@ $(function() {
     //init();
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
-            /*var currentColor = $(this).css('background-color');
-            currentColor = currentColor.toString();
-            if (currentColor == blue) {
-                $(this).css('background-color', green);
-            } else if (currentColor == green) {
-                $(this).css('background-color', red);
-            } else if (currentColor == red) {
-                $(this).css('background-color', orange);
-            } else if (currentColor == orange) {
-                $(this).css('background-color', yellow);
-            } else if (currentColor == yellow) {
-                $(this).css('background-color', white);
-            } else if (currentColor == white) {
-                $(this).css('background-color', blue);
-            }*/
+            
             $(this).css('background-color', colorPicker);
         }
     });
@@ -58,7 +44,9 @@ $(function() {
     });
 
     $('#statebtn').click(function() {
-        Android.showToast("hola");
+        if(typeof Android != "undefined"){
+            Android.showToast("hola");
+        }
         FACES[face][s0] = getColor($('#s0').css('background-color').toString());
         FACES[face][s1] = getColor($('#s1').css('background-color').toString());
         FACES[face][s2] = getColor($('#s2').css('background-color').toString());
@@ -169,30 +157,6 @@ function makeMovementsArray(array){
     });
     return movementsArray;
 }
-
-/*function touchHandler(event) {
-    var touch = event.changedTouches[0];
-
-    var simulatedEvent = document.createEvent("MouseEvent");
-        simulatedEvent.initMouseEvent({
-        touchstart: "mousedown",
-        touchmove: "mousemove",
-        touchend: "mouseup"
-    }[event.type], true, true, window, 1,
-        touch.screenX, touch.screenY,
-        touch.clientX, touch.clientY, false,
-        false, false, false, 0, null);
-
-    touch.target.dispatchEvent(simulatedEvent);
-    event.preventDefault();
-}*/
-
-/*function init() {
-    document.addEventListener("touchstart", touchHandler, true);
-    document.addEventListener("touchmove", touchHandler, true);
-    document.addEventListener("touchend", touchHandler, true);
-    document.addEventListener("touchcancel", touchHandler, true);
-}*/
 
 function getColorOf(letter){
     var color;
