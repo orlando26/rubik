@@ -11,6 +11,13 @@ var s0=M, s1=p, s2=P, s3=m,s4='CF', s5=o, s6=N, s7=n, s8=O;
 var face = 'front';
 $(function() {
     //init();
+    $('#btnPruebas').click(
+        function(){
+            var p = perteneciente('a');
+            var colorCentro = centro('A'); 
+            console.log(hacia('N'));
+            });
+    
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
             
@@ -158,28 +165,101 @@ function makeMovementsArray(array){
     return movementsArray;
 }
 
-function getColorOf(letter){
+function hacia(letter){
     var color;
     var letterCode = letter.charCodeAt(0);
-    var currentFace = '';
-    if(letterCode >=97 && letterCode <= 100){
-        currentFace = 'up';
-    }else if(letterCode <= 104){
-        currentFace = 'back';
-    }else if(letterCode <= 108){
-        currentFace = 'left';
-    }else if(letterCode <= 112){
-        currentFace = 'front';
-    }else if (letterCode <= 116){
-        currentFace = 'right';
-    }else if (letterCode <= 120){
-        currentFace = 'down';
-    }
-    
+    var currentFace = obtenerCara(letterCode);
     color = FACES[currentFace][letter];
     return color;
 }
 
+function centro(pieza){
+       var letterCode = pieza.charCodeAt(0);
+       var cara = obtenerCara(letterCode);
+       var colorCentro = "";
+       var colores = [];
+       for (var key in FACES[cara]){
+           colores.push(FACES[cara][key]);
+       }
+       colorCentro = colores[3]
+       return colorCentro;
+}
+
+function obtenerCara(letterCode){
+    var currentFace = '';
+    if((letterCode >=97 && letterCode <= 100) | (letterCode >=65 && letterCode <= 68)){
+        currentFace = 'up';
+    }else if((letterCode >= 101 && letterCode <= 104) | (letterCode >=69 && letterCode <= 72)){
+        currentFace = 'back';
+    }else if((letterCode >= 105 && letterCode <= 108) | (letterCode >=73 && letterCode <= 76)){
+        currentFace = 'left';
+    }else if((letterCode >= 109 && letterCode <= 112) | (letterCode >=77 && letterCode <= 80)){
+        currentFace = 'front';
+    }else if ((letterCode >= 113 && letterCode <= 116) | (letterCode >=81 && letterCode <= 84)){
+        currentFace = 'right';
+    }else if ((letterCode >= 117 && letterCode <= 120) | (letterCode >=85 && letterCode <= 88)){
+        currentFace = 'down';
+    }
+    return currentFace;
+}
+
+/* Funcion que regresa la letra perteneciente a la misma pieza */
+function perteneciente(letter){
+    var perteneciente;
+    switch(letter){
+        case 'a':perteneciente = 'm';break;
+        case 'b':perteneciente = 'i';break;
+        case 'c':perteneciente = 'e';break;
+        case 'd':perteneciente = 'q';break;
+        case 'e':perteneciente = 'c';break;
+        case 'f':perteneciente = 'l';break;
+        case 'g':perteneciente = 'w';break;
+        case 'h':perteneciente = 'r';break;
+        case 'i':perteneciente = 'b';break;
+        case 'j':perteneciente = 'p';break;
+        case 'k':perteneciente = 'x';break;
+        case 'l':perteneciente = 'f';break;
+        case 'm':perteneciente = 'a';break;
+        case 'n':perteneciente = 't';break;
+        case 'o':perteneciente = 'u';break;
+        case 'p':perteneciente = 'j';break;
+        case 'q':perteneciente = 'd';break;
+        case 'r':perteneciente = 'h';break;
+        case 's':perteneciente = 'v';break;
+        case 't':perteneciente = 'n';break;
+        case 'u':perteneciente = 'o';break;
+        case 'v':perteneciente = 's';break;
+        case 'w':perteneciente = 'g';break;
+        case 'x':perteneciente = 'k';break;
+        
+        case 'A':perteneciente = ['N', 'Q'];break;
+        case 'B':perteneciente = ['J', 'M'];break;
+        case 'C':perteneciente = ['F', 'I'];break;
+        case 'D':perteneciente = ['R', 'E'];break;
+        case 'E':perteneciente = ['R', 'D'];break;
+        case 'F':perteneciente = ['C', 'I'];break;
+        case 'G':perteneciente = ['L', 'X'];break;
+        case 'H':perteneciente = ['W', 'S'];break;
+        case 'I':perteneciente = ['F', 'C'];break;
+        case 'J':perteneciente = ['B', 'M'];break;
+        case 'K':perteneciente = ['P', 'U'];break;
+        case 'L':perteneciente = ['X', 'G'];break;
+        case 'M':perteneciente = ['J', 'B'];break;
+        case 'N':perteneciente = ['A', 'Q'];break;
+        case 'O':perteneciente = ['T', 'V'];break;
+        case 'P':perteneciente = ['U', 'K'];break;
+        case 'Q':perteneciente = ['N', 'A'];break;
+        case 'R':perteneciente = ['D', 'E'];break;
+        case 'S':perteneciente = ['H', 'W'];break;
+        case 'T':perteneciente = ['V', 'O'];break;
+        case 'U':perteneciente = ['K', 'P'];break;
+        case 'V':perteneciente = ['O', 'T'];break;
+        case 'W':perteneciente = ['S', 'H'];break;
+        case 'X':perteneciente = ['G', 'L'];break;
+        
+    }
+    return perteneciente;
+}
 
 
 
