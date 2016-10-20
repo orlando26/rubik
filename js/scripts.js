@@ -9,13 +9,16 @@ var colorPicker;
 var a='a',A='A', b='b',B='B', c='c',C='C', d='d',D='D', e='e', E='E', f='f', F='F', g='g', G='G', h='h', H='H', i='i', I='I', j='j', J='J', k='k', K='K', l='l', L='L',  m='m', M='M', n='n', N='N', o='o', O='O', p='p', P='P', q='q', Q='Q', r='r', R='R', s='s', S='S', t='t', T='T', u='u', U='U',v='v',V='V',w='w',W='W', x='x', X='X';
 var s0=M, s1=p, s2=P, s3=m,s4='CF', s5=o, s6=N, s7=n, s8=O;
 var face = 'front';
+var esquinasMemo = true;
+var aristasMemo = false;
 $(function() {
     //init();
     $('#btnPruebas').click(
         function(){
             var p = perteneciente('a');
             var colorCentro = centro('A'); 
-            console.log(hacia('N'));
+            var pos = posibles(colorCentro);
+            console.log(pos);
             });
     
     $('.square').click(function() {
@@ -40,15 +43,7 @@ $(function() {
          }
      });
     
-    $('#girarTest').click(function(){
-        console.log(getColorOf(a));
-        var simpleFormMoves = [
-            "R'", "D'", "R", "D"
-        ];
-        
-        var movements = makeMovementsArray(simpleFormMoves);
-        cube._solve(movements);
-    });
+   
 
     $('#statebtn').click(function() {
         if(typeof Android != "undefined"){
@@ -261,6 +256,33 @@ function perteneciente(letter){
     return perteneciente;
 }
 
+/* Devuelve las letras posibles
+    @param: color
+    @return: posibles[] */
+function posibles(color){
+    console.log(color);
+    var posibles = [];
+    if (aristasMemo){
+        switch(color){
+            case 'white': posibles = [a, b, c, d];break;
+            case 'blue': posibles = [e, f, g, h];break;
+            case 'orange': posibles = [i, j, k, l];break;
+            case 'green': posibles = [m, n, o, p];break;
+            case 'red': posibles = [q, r, s, t];break;
+            case "yellow": posibles = [u, v, w, x];break;
+        }
+    }else{
+        switch(color){
+            case 'white': posibles = [A, B, C, D];break;
+            case 'blue': posibles = [E, F, G, H];break;
+            case 'orange': posibles = [I, J, K, L];break;
+            case 'green': posibles = [M, N, O, P];break;
+            case 'red': posibles = [Q, R, S, T];break;
+            case 'yellow': posibles = [U, V, W, X];break;
+        }
+    }
+    return posibles;
+}
 
 
 
