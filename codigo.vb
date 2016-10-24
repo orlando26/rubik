@@ -11,93 +11,29 @@ Public vA, vB, vC, vD, vE, vF, vG, vH, vI, vJ, vK, vL, vM, vN, vO, vP, vQ, vR, v
 Public EsquinasMemo
 Public AristasMemo
 
-Private Sub BotonLimpiar_Click()
+Function Hacia(ByRef variable As Variant)
+'----------------------------------------------------------------
+'              Devuelve el color de buffer, pieza o pareja
+'----------------------------------------------------------------
+    If Range(variable).Interior.Color = RGB(255, 255, 255) Then
+        Hacia = "bla"
+    ElseIf Range(variable).Interior.Color = RGB(255, 255, 0) Then
+        Hacia = "ama"
+    ElseIf Range(variable).Interior.Color = RGB(0, 112, 192) Then
+        Hacia = "azu"
+    ElseIf Range(variable).Interior.Color = RGB(0, 176, 80) Then
+        Hacia = "ver"
+    ElseIf Range(variable).Interior.Color = RGB(255, 0, 0) Then
+        Hacia = "roj"
+    ElseIf Range(variable).Interior.Color = RGB(255, 152, 1) Then
+        Hacia = "nar"
+    End If
 
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    
-    ColorInicial = RGB(255, 255, 255)                             'Blanco
-    ws.Range("M:O").ClearContents
-    ws.Range("R2").Value = ""
-    
-    Range("A4:L12").Interior.Color = ColorInicial                 'Limpia: pone color blanco
-    Range("H5").Interior.Color = RGB(255, 255, 255)               'Colores de los centros
-    Range("B8").Interior.Color = RGB(0, 112, 192)
-    Range("E8").Interior.Color = RGB(255, 152, 1)
-    Range("H8").Interior.Color = RGB(0, 176, 80)
-    Range("H11").Interior.Color = RGB(255, 255, 0)
-    Range("k8").Interior.Color = RGB(255, 0, 0)
-    
-End Sub
-
-Private Sub BotonBlanco_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(255, 255, 255)
-    ColocarColor.Value = "Blanco"
-    ws.Range("G2:I2").Interior.Color = ColorBoton
-
-End Sub
-
-Private Sub BotonAzul_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(0, 112, 192)
-    ColocarColor.Value = "Azul"
-    Range("G2:I2").Interior.Color = ColorBoton
-
-End Sub
-
-Private Sub BotonNaranja_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(255, 152, 1)
-    ColocarColor.Value = "Naranja"
-    Range("G2:I2").Interior.Color = ColorBoton
-    
-End Sub
-
-Private Sub BotonVerde_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(0, 176, 80)
-    ColocarColor.Value = "Verde"
-    Range("G2:I2").Interior.Color = ColorBoton
-    
-End Sub
-
-Private Sub BotonRojo_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(255, 0, 0)
-    ColocarColor.Value = "Rojo"
-    Range("G2:I2").Interior.Color = ColorBoton
-    
-End Sub
-
-Private Sub BotonAmarillo_Click()
-
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    Set ColocarColor = ws.Range("H2")
-    
-    ColorBoton = RGB(255, 255, 0)
-    ColocarColor.Value = "Amarillo"
-    Range("G2:I2").Interior.Color = ColorBoton
-    
-End Sub
+End Function
 
 Function Posibles(ByRef variable As Variant)
 '----------------------------------------------------------------
-'                Posibles (relacionado color - letras)
+'                Devuelve las letras de un color
 '----------------------------------------------------------------
   If AristasMemo = 1 Then
     Select Case variable
@@ -124,70 +60,33 @@ End Function
 
 Function centro(ByRef variable As Variant)        'Centro
 '----------------------------------------------------------------
-'                (relacionado letras - color)
+'        Devuelve el color de centro de una Pieza (de una letra)
 '----------------------------------------------------------------
-    If AristasMemo = 1 Then
-
-        If (variable = a Or variable = b Or variable = c Or variable = d) Then
-            centro = "bla"
-        ElseIf (variable = e Or variable = f Or variable = g Or variable = h) Then
-            centro = "azu"
-        ElseIf (variable = i Or variable = j Or variable = k Or variable = l) Then
-            centro = "nar"
-        ElseIf (variable = m Or variable = n Or variable = o Or variable = p) Then
-            centro = "ver"
-        ElseIf (variable = q Or variable = r Or variable = s Or variable = t) Then
-            centro = "roj"
-        ElseIf (variable = u Or variable = v Or variable = w Or variable = x) Then
-            centro = "ama"
-        End If
+   
+   Select Case variable
+        Case a, b, c, d: centro = "bla"
+        Case e, f, g, h: centro = "azu"
+        Case i, j, k, l: centro = "nar"
+        Case m, n, o, p: centro = "ver"
+        Case q, r, s, t: centro = "roj"
+        Case u, v, w, x: centro = "ama"
     
-    ElseIf EsquinasMemo = 1 Then
-
-        If (variable = vA Or variable = vB Or variable = vC Or variable = vD) Then
-            centro = "bla"
-        ElseIf (variable = vE Or variable = vF Or variable = vG Or variable = vH) Then
-            centro = "azu"
-        ElseIf (variable = vI Or variable = vJ Or variable = vK Or variable = vL) Then
-            centro = "nar"
-        ElseIf (variable = vM Or variable = vN Or variable = vO Or variable = vP) Then
-            centro = "ver"
-        ElseIf (variable = vQ Or variable = vR Or variable = vS Or variable = vT) Then
-            centro = "roj"
-        ElseIf (variable = vU Or variable = vV Or variable = vW Or variable = vX) Then
-            centro = "ama"
-        End If
-    
-    End If
+        Case vA, vB, vC, vD: centro = "bla"
+        Case vE, vF, vG, vH: centro = "azu"
+        Case vI, vJ, vK, vL: centro = "nar"
+        Case vM, vN, vO, vP: centro = "ver"
+        Case vQ, vR, vS, vT: centro = "roj"
+        Case vU, vV, vW, vX: centro = "ama"
+    End Select
     
 End Function
 
-Function Hacia(ByRef variable As Variant)
-'----------------------------------------------------------------
-'              Color de buffer, pieza o pareja
-'----------------------------------------------------------------
-    If Range(variable).Interior.Color = RGB(255, 255, 255) Then
-        Hacia = "bla"
-    ElseIf Range(variable).Interior.Color = RGB(255, 255, 0) Then
-        Hacia = "ama"
-    ElseIf Range(variable).Interior.Color = RGB(0, 112, 192) Then
-        Hacia = "azu"
-    ElseIf Range(variable).Interior.Color = RGB(0, 176, 80) Then
-        Hacia = "ver"
-    ElseIf Range(variable).Interior.Color = RGB(255, 0, 0) Then
-        Hacia = "roj"
-    ElseIf Range(variable).Interior.Color = RGB(255, 152, 1) Then
-        Hacia = "nar"
-    End If
-
-End Function
 
 Function Perteneciente(ByRef variable As Variant)
 '----------------------------------------------------------------
 '                Pertenecientes (parejas)
 '----------------------------------------------------------------
-    
-    If AristasMemo = 1 Then
+
         Select Case variable
             Case a: Perteneciente = m
             Case b: Perteneciente = i
@@ -213,10 +112,7 @@ Function Perteneciente(ByRef variable As Variant)
             Case v: Perteneciente = s
             Case w: Perteneciente = g
             Case x: Perteneciente = k
-        End Select
-        
-   ElseIf EsquinasMemo = 1 Then
-        Select Case variable
+
             Case vA: Perteneciente = Array(vN, vQ)
             Case vB: Perteneciente = Array(vJ, vM)
             Case vC: Perteneciente = Array(vF, vI)
@@ -242,92 +138,79 @@ Function Perteneciente(ByRef variable As Variant)
             Case vW: Perteneciente = Array(vS, vH)
             Case vX: Perteneciente = Array(vG, vL)
         End Select
-        
-    End If
     
 End Function
 
-Private Sub Resolver_Click()
+'///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+'                           PROGRAMA PRINCIPAL
+'//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Private Sub Solucion_Click()                                
 
-    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
-    
-    Range("G4:I6").Interior.Color = RGB(255, 255, 255)               'Colores de los centros
-    Range("A7:C9").Interior.Color = RGB(0, 112, 192)
-    Range("D7:F9").Interior.Color = RGB(255, 152, 1)
-    Range("G7:I9").Interior.Color = RGB(0, 176, 80)
-    Range("J7:L9").Interior.Color = RGB(255, 0, 0)
-    Range("G10:I12").Interior.Color = RGB(255, 255, 0)
-    
-End Sub
-
-Private Sub Solucion_Click()
-
-EsquinasMemo = 1
-AristasMemo = 0
+    EsquinasMemo = 1
+    AristasMemo = 0
 
 '-------------------------------------------------------------------------------------------------------------
 '                      Declaración de variables y otras inicializaciones
 
-Dim PIEZA                   As Variant              'Guardará la pieza que se está analizando: a, b, c, d...
-                                                      'es Variant porque también se puede referir a su ubicación, ej a="h6"
-Dim Pareja1                 As Variant             'Pareja(perteneciente) de PIEZA
-Dim Pareja2                 As Variant
-
-Dim buf1, buf2, buf3        As Variant              'Son los colores del buffer y del perteneciente(pareja) de éste, ej buf = "azu" para azul
-Dim HaciaColor, HaciaColor2, HaciaColor3 As Variant 'Colores de la pieza analizada y el perteneciente(pareja) de ésta. ej. HaciaColor="bla"...
-Dim Revisados               As New Collection       'Lista de PIEZAs que ya se revisaron
-Dim Esquinas                 As New Collection       'Lista de PIEZAs (Esquinas) "memorizadas"
-Dim Completo                As New Collection       'Lista de "a" a "x", se le resta "Revisados" y quedan las Esquinas que aún no se revisan.
-Dim Posible                                         'Arreglo de letras relacionadas a una cara. Ej a,b,c,d para blanco, i,j,k,l para Naranja, etc.
-Dim cc                      As Integer              'Contador que servirá para revisar cada pieza en el arreglo "Posible"
-Dim zz                      As Integer              'Servirá para eliminar de "Completos" las esquinas que hay en "revisados"; también para escribir en la hoja las Esquinas memorizadas.
-Dim ParejaTemp              As Variant              'Pareja de la pieza hacia donde "podría" ir la pieza que está en el buffer
-Dim HaciaColor2Temp         As Variant              'Color de ParejaTemp
-Dim Cuantos                 As Integer              'Cantidad de letras en la lista Revisados
-Dim RandomNo                As Integer              'Numero random que se usará al iniciar otro ciclo
-Dim buffer                  As Variant              'Pieza buffer de ciclos que no empiezan en a o m
-Dim ParejaB                 As Variant              'Pareja de buffer de ciclos que no empiezan en a o m
-Dim AristaNombre            As Range                'Se usará como la dirección donde se colocarán las Esquinas memorizadas.
-Dim ConteoEsquinas           As Integer              'Se usará para saber cuántas Esquinas se memorizaron
-
-Dim CountA As Integer                               'Contador para revisar si la arista es par o impar
-Dim CountAesPar As Integer                          'Se usará para saber si la posición de la arista en el arreglo memorizado es par o impar
-Dim Paridad As String                               'Se usará para saber si existe paridad o no
-Set wsA = Worksheets("Algs Modificados")            'wsA es la hoja que contiene tooodos los algoritmos
-
-
-Set ws = Worksheets("Simulación_Aristas")
-ws.Range("M:O").ClearContents                       'Borra los resultados anteriores escritos en la hoja
-ws.Range("R2").Value = ""                           'Borra los resultados anteriores escritos en la hoja
-
+    Dim PIEZA                   As Variant              'Guardará la pieza que se está analizando: a, b, c, d...
+                                                        'es Variant porque también se puede referir a su ubicación, ej a="h6"
+    Dim Pareja1                 As Variant              'Pareja(perteneciente) de PIEZA
+    Dim Pareja2                 As Variant
+    
+    Dim buf1, buf2, buf3        As Variant              'Son los colores del buffer y del perteneciente(pareja) de éste, ej buf = "azu" para azul
+    Dim HaciaColor, _
+        HaciaColor2, _
+        HaciaColor3             As Variant 'Colores de la pieza analizada y el perteneciente(pareja) de ésta. ej. HaciaColor="bla"...
+    Dim Revisados               As New Collection       'Lista de PIEZAs que ya se revisaron
+    Dim Esquinas                As New Collection       'Lista de PIEZAs (Esquinas) "memorizadas"
+    Dim Completo                As New Collection       'Lista de "a" a "x", se le resta "Revisados" y quedan las Esquinas que aún no se revisan.
+    Dim Posible                                         'Arreglo de letras relacionadas a una cara. Ej a,b,c,d para blanco, i,j,k,l para Naranja, etc.
+    Dim cc                      As Integer              'Contador que servirá para revisar cada pieza en el arreglo "Posible"
+    Dim zz                      As Integer              'Servirá para eliminar de "Completos" las esquinas que hay en "revisados"; también para escribir en la hoja las Esquinas memorizadas.
+    Dim ParejaTemp              As Variant              'Pareja de la pieza hacia donde "podría" ir la pieza que está en el buffer
+    Dim HaciaColor2Temp         As Variant              'Color de ParejaTemp
+    Dim Cuantos                 As Integer              'Cantidad de letras en la lista Revisados
+    Dim RandomNo                As Integer              'Numero random que se usará al iniciar otro ciclo
+    Dim buffer                  As Variant              'Pieza buffer de ciclos que no empiezan en a o m
+    Dim ParejaB                 As Variant              'Pareja de buffer de ciclos que no empiezan en a o m
+    Dim AristaNombre            As Range                'Se usará como la dirección donde se colocarán las Esquinas memorizadas.
+    Dim ConteoEsquinas          As Integer              'Se usará para saber cuántas Esquinas se memorizaron
+    Dim CountA                  As Integer              'Contador para revisar si la arista es par o impar
+    Dim CountAesPar             As Integer              'Se usará para saber si la posición de la arista en el arreglo memorizado es par o impar
+    Dim Paridad                 As String               'Se usará para saber si existe paridad o no
+    Set wsA = Worksheets("Algs Modificados")            'wsA es la hoja que contiene tooodos los algoritmos
+    
+    Set ws = Worksheets("Simulación_Aristas")
+    ws.Range("M:O").ClearContents                       'Borra los resultados anteriores escritos en la hoja
+    ws.Range("R2").Value = ""                           'Borra los resultados anteriores escritos en la hoja
 
 '-------------------------------------------------------------------------------------------------------------
 '                      Referencias de letras a la hoja "Simulación_aristas"
 
-vA = "i6"
-vB = "g6"
-vC = "g4"
-vD = "i4"
-vE = "a7"
-vF = "c7"
-vG = "c9"
-vH = "a9"
-vI = "d7"
-vJ = "f7"
-vK = "f9"
-vL = "d9"
-vM = "g7"
-vN = "i7"
-vO = "i9"
-vP = "g9"
-vQ = "j7"
-vR = "l7"
-vS = "l9"
-vT = "j9"
-vU = "g10"
-vV = "i10"
-vW = "i12"
-vX = "g12"
+    vA = "i6"
+    vB = "g6"
+    vC = "g4"
+    vD = "i4"
+    vE = "a7"
+    vF = "c7"
+    vG = "c9"
+    vH = "a9"
+    vI = "d7"
+    vJ = "f7"
+    vK = "f9"
+    vL = "d9"
+    vM = "g7"
+    vN = "i7"
+    vO = "i9"
+    vP = "g9"
+    vQ = "j7"
+    vR = "l7"
+    vS = "l9"
+    vT = "j9"
+    vU = "g10"
+    vV = "i10"
+    vW = "i12"
+    vX = "g12"
 
 '------------------------------------------------------------------------------------------------------------------------------------------
 '                                              MÉTODO DE SOLUCIÓN (MEMORIZACIÓN)
@@ -335,13 +218,13 @@ vX = "g12"
 
 'Blanco arriba, verde en frente
     
-PIEZA = vA                     'Siempre se comienza a memorizar el primer ciclo en el buffer (en la pieza A)
+PIEZA = vA                    'Siempre se comienza a memorizar el primer ciclo en el buffer (en la pieza A)
 buf1 = "bla"                  'El color del buffer siempre será blanco
 buf2 = "ver"                  'El color de la pareja1 del buffer siempre será verde
 buf3 = "roj"                  'El color de la parej2 del buffer siempre será rojo
 
-loop1 = 0
-nunca = 0
+loop1 = 0                     'Sirve para decidir si salir del Do 1(loop1) 
+nunca = 0                     'Sirve para "controlar" el loop 1.1
 
 Do 'Loop1 para paso comienza ciclo
 
@@ -403,7 +286,6 @@ Do 'Loop1 para paso comienza ciclo
                                                                  'Comienza ciclo para memorizar aristas
         Posible = Posibles(HaciaColor)                          'La función "Posibles" devuelve las piezas donde podría
                                                                 ' ir la pieza que está en el buffer, depende del color de PIEZA
-        
         loop3 = 0
         Do While loop3 = 0 'loop3
     
@@ -459,15 +341,12 @@ Do 'Loop1 para paso comienza ciclo
     Cuantos = Revisados.Count                                       'Cuantos es la cantidad de aristas revisadas
     
     For zz = 1 To Cuantos
-        On Error Resume Next                                        'Si ocurre error en siguiente linea (si ya se había eliminado la arista)...
-                                                                    '...checa la siguiente letra en Revisados
-        Completo.Remove Revisados(zz)                               'Elimina de la lista Completo las aristas que ya se revisaron,
-                                                                    'Se usará para saber cuantas y cuáles piezas faltan de revisar.
+        On Error Resume Next                                        'Si ocurre error en siguiente linea (si ya se había eliminado la arista),checa la siguiente letra en Revisados
+        Completo.Remove Revisados(zz)                               'Elimina de la lista Completo las aristas que ya se revisaron,Se usará para saber cuantas y cuáles piezas faltan de revisar
     Next zz
 
     If Completo.Count = 0 Then                                      'Si ya no hay piezas por revisar
-'Acaba la memorización
-    Exit Do 'sale de loop1
+        Exit Do 'sale de loop1
     End If
 
     '-------------------------------------------------------------------------------------------------
@@ -496,8 +375,8 @@ Do 'Loop1 para paso comienza ciclo
     Revisados.Add PIEZA                                             'Se agrega el nuevo buffer y su pareja a piezas revisadas.
     Revisados.Add Pareja1
     Revisados.Add Pareja2
-                                                                    'Comienza ciclo (uno nuevo :D, dentro del paso 3)
-loop1 = 1
+                                                                    
+loop1 = 1                                                           'Comienza ciclo (uno nuevo :D, dentro del paso 3)
 nunca = 1
 Loop 'loop1
     
@@ -1138,6 +1017,8 @@ Range("B12").Value = "Minutos, si se hacen 3 giros por segundo"
 
 End Sub
 
+
+
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
 '----------------------------------------------------------------
 '                Colocar estado inicial
@@ -1162,4 +1043,103 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
         
     End If
 
+End Sub
+
+
+Private Sub BotonLimpiar_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    
+    ColorInicial = RGB(255, 255, 255)                             'Blanco
+    ws.Range("M:O").ClearContents
+    ws.Range("R2").Value = ""
+    
+    Range("A4:L12").Interior.Color = ColorInicial                 'Limpia: pone color blanco
+    Range("H5").Interior.Color = RGB(255, 255, 255)               'Colores de los centros
+    Range("B8").Interior.Color = RGB(0, 112, 192)
+    Range("E8").Interior.Color = RGB(255, 152, 1)
+    Range("H8").Interior.Color = RGB(0, 176, 80)
+    Range("H11").Interior.Color = RGB(255, 255, 0)
+    Range("k8").Interior.Color = RGB(255, 0, 0)
+    
+End Sub
+
+
+Private Sub Resolver_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    
+    Range("G4:I6").Interior.Color = RGB(255, 255, 255)               'Colores de los centros
+    Range("A7:C9").Interior.Color = RGB(0, 112, 192)
+    Range("D7:F9").Interior.Color = RGB(255, 152, 1)
+    Range("G7:I9").Interior.Color = RGB(0, 176, 80)
+    Range("J7:L9").Interior.Color = RGB(255, 0, 0)
+    Range("G10:I12").Interior.Color = RGB(255, 255, 0)
+    
+End Sub
+
+Private Sub BotonBlanco_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(255, 255, 255)
+    ColocarColor.Value = "Blanco"
+    ws.Range("G2:I2").Interior.Color = ColorBoton
+
+End Sub
+
+Private Sub BotonAzul_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(0, 112, 192)
+    ColocarColor.Value = "Azul"
+    Range("G2:I2").Interior.Color = ColorBoton
+
+End Sub
+
+Private Sub BotonNaranja_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(255, 152, 1)
+    ColocarColor.Value = "Naranja"
+    Range("G2:I2").Interior.Color = ColorBoton
+    
+End Sub
+
+Private Sub BotonVerde_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(0, 176, 80)
+    ColocarColor.Value = "Verde"
+    Range("G2:I2").Interior.Color = ColorBoton
+    
+End Sub
+
+Private Sub BotonRojo_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(255, 0, 0)
+    ColocarColor.Value = "Rojo"
+    Range("G2:I2").Interior.Color = ColorBoton
+    
+End Sub
+
+Private Sub BotonAmarillo_Click()
+
+    Set ws = ActiveWorkbook.Sheets("Simulación_Aristas")
+    Set ColocarColor = ws.Range("H2")
+    
+    ColorBoton = RGB(255, 255, 0)
+    ColocarColor.Value = "Amarillo"
+    Range("G2:I2").Interior.Color = ColorBoton
+    
 End Sub
