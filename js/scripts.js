@@ -13,13 +13,7 @@ var esquinasMemo = true;
 var aristasMemo = false;
 $(function() {
     //init();
-    $('#btnPruebas').click(
-        function(){
-            var p = perteneciente('a');
-            var colorCentro = centro('A'); 
-            var pos = posibles(colorCentro);
-            console.log(pos);
-            });
+  
     
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
@@ -176,7 +170,7 @@ function centro(pieza){
        for (var key in FACES[cara]){
            colores.push(FACES[cara][key]);
        }
-       colorCentro = colores[3]
+       colorCentro = colores[4]
        return colorCentro;
 }
 
@@ -260,7 +254,6 @@ function perteneciente(letter){
     @param: color
     @return: posibles[] */
 function posibles(color){
-    console.log(color);
     var posibles = [];
     if (aristasMemo){
         switch(color){
@@ -284,5 +277,18 @@ function posibles(color){
     return posibles;
 }
 
+/**
+ * Remove piece from an array 
+ * @param {String} value
+ */
+Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
+
+// Returns a random integer between min (included) and max (excluded)
+// Using Math.round() will give you a non-uniform distribution!
+function randomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 
