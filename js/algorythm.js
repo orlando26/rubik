@@ -17,7 +17,7 @@ function pasoEsquinas() {
     var buf1 = "white"; //El color del buffer siempre sera blanco
     var buf2 = "green"; //El color de la pareja1 del buffer siempre sera verde
     var buf3 = "red";   //El color de la pareja2 del buffer siempre sera rojo
-    var esquinasMemo = [];
+    var esquinasMemo = []; //lista de esquinas memorizadas
     var revisados = []; //Lista de piezas revisadas
     var haciaColor;
     var pareja1;
@@ -25,13 +25,21 @@ function pasoEsquinas() {
     var haciaColor;
     var haciaColor3;
     var posible;
-    var cc = 0;
     var flag = false;
-   var listaEsquinas = [];
+    var listaEsquinas = []; //lista de esquinas que faltan por revisar
+
+    /**
+     * loop principal. se repetira hasta que no existan piezas en el arreglo
+     * de esquinas por revisar
+     */
     memoEsquinas: while (true) {
+        /**loop que representa cada ciclo de memorizacion*/
         do {
+            /**Bloque buffer, se saltara este bloque cada que el loop
+             * de memorizacion tenga condicion verdadera
+             */
             buffer: {
-                if(flag){
+                if (flag) {
                     flag = false
                     break buffer;
                 }
@@ -47,19 +55,19 @@ function pasoEsquinas() {
                 revisados.push(pareja2);
             }
 
-
+            /**Checa cada pieza del arreglo posibles hasta encontrar la pieza correcta */
             for (var posible in posibles(haciaColor)) {
                 var parejaTemp1 = perteneciente(posibles(haciaColor)[posible])[0];
                 var parejaTemp2 = perteneciente(posibles(haciaColor)[posible])[1];
                 var haciaColorTemp2 = centro(parejaTemp1);
                 var haciaColorTemp3 = centro(parejaTemp2);
-                
+
                 if ((haciaColorTemp2 == haciaColor2 && haciaColorTemp3 == haciaColor3)
                     || (haciaColorTemp2 == haciaColor3 && haciaColorTemp3 == haciaColor2)) {
                     esquinasMemo.push(posibles(haciaColor)[posible]);
                     pieza = posibles(haciaColor)[posible];
                     console.log('encontro ' + pieza + ' :D');
-                    break;
+                    break; //rompe el for una vez que encontro la pieza
                 }
             }
 
@@ -69,13 +77,14 @@ function pasoEsquinas() {
             || (haciaColor == buf2 && haciaColor2 == buf3 && haciaColor3 == buf1)
             || (haciaColor == buf3 && haciaColor2 == buf1 && haciaColor3 == buf2)
             || (haciaColor == buf3 && haciaColor2 == buf2 && haciaColor3 == buf1)));
+            
         listaEsquinas = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X];
         for (var pza in revisados) {
             listaEsquinas.remove(revisados[pza]);
         }
         if (listaEsquinas.length == 0) {
             console.log('se acabo :D')
-            break memoEsquinas;
+            break memoEsquinas; //rompe el loop principal en caso de que el arreglo ya no tenga piezas por revisar
         }
         var rnd = randomInt(0, listaEsquinas.length - 1);
         pieza = listaEsquinas[rnd];
