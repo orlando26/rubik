@@ -20,6 +20,10 @@ Private Sub Solucion_Click()
         Set ws = Worksheets("Simulación_Aristas")           'Hoja donde se realiza la simulación
         ws.Range("M:O").ClearContents                       'Borra los resultados anteriores escritos en la hoja
         ws.Range("R2").Value = ""                           'Borra los resultados anteriores escritos en la hoja
+        Set wsA = Worksheets("Algs Modificados")            'wsA es la hoja que contiene tooodos los algoritmos
+        Set ws = Worksheets("Simulación_Aristas")
+        Dim aristaNombre            As Range                'Se usará como la dirección donde se colocarán las Esquinas memorizadas.
+        Dim EsquinaNombre           as Range
 
         Dim pieza                   As Variant              'Guardará la pieza que se está analizando: a, b, c, d...
         Dim pareja1                 As Variant              'Pareja(perteneciente) de PIEZA (para aristas y esquinas)
@@ -28,24 +32,25 @@ Private Sub Solucion_Click()
         Dim haciaColor, haciaColor2, haciaColor3 As Variant 'Colores de la pieza analizada y de sus parejas.
         Dim revisados               As New Collection       'Lista de piezas que ya se revisaron
         Dim esquinas                As New Collection       'Lista de letras "memorizadas" para esquinas
+        Dim Aristas                 As New Collection       'Lista de PIEZAs (aristas) "memorizadas"
         Dim completo                As New Collection       'Lista de "a" a "x".
         Dim posible                                         'Arreglo de letras relacionadas a una cara. Ej a,b,c,d para blanco, etc.
         Dim parejaTemp              As Variant              'Pareja de la pieza hacia donde "podría" ir la pieza que está en el buffer
-        Dim haciaColorTemp2         As Variant              'Color de ParejaTemp
+        Dim haciaColorTemp1         As Variant              'Color de ParejaTemp
         Dim cuantos                 As Integer              'Cantidad de letras en la lista Revisados
         Dim randomNo                As Integer              'Numero random que se usará al iniciar otro ciclo
         Dim buffer                  As Variant              'Pieza buffer de ciclos que no empiezan en a o m
-        Dim parejaB                 As Variant              'Pareja de buffer de ciclos que no empiezan en a o m
-        
-        Dim cc                      As Integer              'Contador xs
-        Dim zz                      As Integer              'Contador xs
-        
+        Dim parejaB1                 As Variant              'Pareja de buffer de ciclos que no empiezan en a o m
+        Dim parejaB2                 As Variant              'Pareja de buffer de ciclos que no empiezan en a o m
+
+        Dim cc                      As Integer              'Contador
+        Dim zz                      As Integer              'Contador
+
+        'Variables que usan celdas de excel:
         Dim conteoEsquinas          As Integer              'Se usará para saber cuántas Esquinas se memorizaron
         Dim countA                  As Integer              'Contador para revisar si la arista es par o impar
         Dim countAesPar             As Integer              'Se usará para saber si la posición de la arista en el arreglo memorizado es par o impar
         Dim paridad                 As String               'Se usará para saber si existe paridad o no
-        
-        Dim aristaNombre            As Range                'Se usará como la dirección donde se colocarán las Esquinas memorizadas.
 
     'Solución de esquinas
             EsquinasMemo = 1                                    'Comienza Memorización de esquinas
@@ -60,82 +65,93 @@ Private Sub Solucion_Click()
             vU = "g10": vV = "i10": vW = "i12": vX = "g12"
 
         '--- MÉTODO DE SOLUCIÓN (MEMORIZACIÓN)
+            
             pieza = vA                    'Siempre se comienza a memorizar el primer ciclo en el buffer (en la pieza A)
             buf1 = "bla"                  'El color del buffer siempre será blanco
             buf2 = "ver"                  'El color de la pareja1 del buffer siempre será verde
             buf3 = "roj"                  'El color de la parej2 del buffer siempre será rojo
 
             loop1 = 0                     'Sirve para decidir si salir del Do 1(loop1)
-            nunca = 0                     'Sirve para "controlar" el loop 1.1
+            loop1p1 = 1                   'Sirve para "controlar" el loop 1.1
 
-            Do 'loop1
-                Do   'loop2
-                    Do While nunca = 0              'loop 1.1
+            Do                                                      'loop1: Por sí solo no es útil, se usa con loop 1.1
+                Do                                                  'loop2: 
+                'Paso1: Color actual de la pieza
 
-                        If loop1 = 1 Then
-                            Exit Do                  'sale de loop1.1
+                    Do While loop1p1 = 1                            'loop 1.1, llega hasta donde se revisa si ya se llegó al buffer
+                    
+                        If loop1 = 1 Then                           'Se ya se completó el loop1, hay que brincar el loop 1.1
+                            Exit Do                  
                         End If
 
-                        haciaColor = Hacia(pieza)                  'Función "Hacia" regresa el color actual de PIEZA
-                        pareja1 = Perteneciente(pieza)(0)          'Perteneciente de PIEZA devuelve letra pareja1 de PIEZA
-                        pareja2 = Perteneciente(pieza)(1)
-                        haciaColor2 = Hacia(pareja1)               'Función "Hacia" regresa el color actual de Pareja
-                        haciaColor3 = Hacia(pareja2)
-                        revisados.Add pieza                        'Se agregar PIEZA y Pareja a la lista de "Revisados"
-                        revisados.Add pareja1
-                        revisados.Add pareja2
+                        haciaColor = Hacia(pieza)                  'Función "Hacia" regresa el color actual de pieza
+                        pareja1 = Perteneciente(pieza)(0)          '"Perteneciente"" devuelve letra pareja1 de pieza
+                        pareja2 = Perteneciente(pieza)(1)          'Devuelve letra pareja2 de PIEZA
+                        haciaColor2 = Hacia(pareja1)               'Función "Hacia" regresa el color actual de pareja1
+                        haciaColor3 = Hacia(pareja2)               'Color actual de pareja2
+                        
+                        revisados.Add pieza                        'Se agrega pieza y parejas a la lista de "Revisados"
+                        revisados.Add pareja1                      'Las letras que ya se hayan usado no se usarán...
+                        revisados.Add pareja2                      '...para comenzar otros ciclos
                     
                         If (haciaColor = buf1 And haciaColor2 = buf2 And haciaColor3 = buf3) _
                             Or (haciaColor = buf1 And haciaColor2 = buf3 And haciaColor3 = buf2) _
                             Or (haciaColor = buf2 And haciaColor2 = buf1 And haciaColor3 = buf3) _
                             Or (haciaColor = buf2 And haciaColor2 = buf3 And haciaColor3 = buf1) _
                             Or (haciaColor = buf3 And haciaColor2 = buf1 And haciaColor3 = buf2) _
-                            Or (haciaColor = buf3 And haciaColor2 = buf2 And haciaColor3 = buf1) Then 'Si los colores en el buffer SON los colores del buffer
-                        
-                            rompe = 1
-                            Exit Do 'salir del loop 1.1
+                            Or (haciaColor = buf3 And haciaColor2 = buf2 And haciaColor3 = buf1) Then 
+                            'Si los colores de pieza y pareja1 y 2 son = a los colores originales del buffer... 
+                            '(Blanco,verde y rojo) entonces ya se completó un ciclo...
                             
-                        End If
+                            rompeCiclo = 1                      '...se rompe ciclo para comenzar otro
+                            Exit Do                             'salir del loop 1.1... **
+                            
+                        End If                                  
                 
-                
-                        '*******3. COMIENZA CICLO DE "MEMORIZACIÓN"
-                        nunca = 1
-                    Loop 'loop1.1
-            
-                    If rompe = 1 Then
-                        rompe = 0
-                        Exit Do 'salir de loop2
+                       loop1p1 = 0                              'Si ya se completó loop1.1, loop1p1 se "apaga" 
+                    Loop                                        'loop1.1 nunca se va a repetir, solo lo ocupamos para encerrar esta sección del programa  
+
+
+                    If rompeCiclo = 1 Then              'Si el resultado del loop1.1 fue que se completó un ciclo...
+                        rompeCiclo = 0                  'Resetea ese valor (vamos a comenzar otro ciclo)
+                        Exit Do 'salir de loop2         'Y sale de loop2 (para ir a paso4: Revisar si acabó memorización)
                     End If
-                                                                        
+                                                  
                     posible = Posibles(haciaColor)                              'Devuelve las piezas donde podría ir la pieza que está en el buffer
-                    cc = 0                                                      'Para revisar en arreglo "posible""
-                    loop3 = 0
+                    cc = 0                                                      'Para revisar el arreglo "posible""
+                    loop3 = 1                                                   'Para repetir loop3
                 
-                    Do While loop3 = 0 'loop3
-            
+
+                    Do While loop3 = 1                                          'loop3, para revisar si la pieza va en alguna de las 4 piezas de una cara
+                    'Paso2. ¿Hacia dónde va la pieza?
                         ParejaTemp1 = Perteneciente(posible(cc))(0)             'Pareja temporal es la pareja de la 1era, 2da, 3era o 4ta pieza del arreglo "posible()"
-                        ParejaTemp2 = Perteneciente(posible(cc))(1)
-                        haciaColorTemp2 = centro(ParejaTemp1)                   'Color de la pareja temporal a donde podría ir la pieza que está en el buffer
-                        HaciaColorTemp3 = centro(ParejaTemp2)
+                        ParejaTemp2 = Perteneciente(posible(cc))(1)             'Recordar que para esquinas hay 2 "parejas"
+                        haciaColorTemp1 = centro(ParejaTemp1)                   'Color de centro de la pareja temporal
+                        haciaColorTemp2 = centro(ParejaTemp2)                   'Color de centro de la otra pareja temporal
                     
-                        If ((haciaColorTemp2 = haciaColor2 And HaciaColorTemp3 = haciaColor3) = 0 And _
-                            (haciaColorTemp2 = haciaColor3 And HaciaColorTemp3 = haciaColor2) = 0) Then            'Si el color de la pareja de PIEZA no es igual al color centro de la pareja de Posible
-                                cc = cc + 1                                     'Incrementa el contador en 1 para checar la siguiente pieza en "Posibles()"
-                                loop3 = 0       'Para repetir el loop3
+                        If ((haciaColorTemp1 = haciaColor2 And haciaColorTemp2 = haciaColor3) = 0 And _
+                            (haciaColorTemp1 = haciaColor3 And haciaColorTemp2 = haciaColor2) = 0) Then            
+                            'Si el color de centro de las parejas temporales no son iguales a los colores de la pieza revisada
+                                cc = cc + 1     'La pieza no va ahí, incrementa el contador para checar la siguiente pieza en "Posibles()"
+                                loop3 = 1       'Para repetir el loop3
                         Else
-                                loop3 = 1       'Para salir del loop3
+                                loop3 = 0       'Si ya se encontró coincidencia de colores, salir del loop3
                         End If
-                    Loop 'loop3                                                 'Regresa a para revisar la siguiente pieza posible
-            
-                    esquinas.Add posible(cc)                                'Agrega la pieza posible a memorización de esquinas
+                    Loop                        'loop3, todo el loop 3 revisa hacia dónde va la pieza actual.
+                    
+
+                    'Paso3: Siguiente pieza
+                    esquinas.Add posible(cc)                                'Agrega la pieza posible a memorización de esquinas (sí es esa hacia donde va la pieza anterior)
                     pieza = posible(cc)                                     'Ahora se revisará a dónde va esta nueva pieza
                     
-                    nunca = 0
-                    loop1 = 0
+                    loop1p1 = 1                                             'Para volver a "encender" loop1.1
+                    loop1 = 0                                               'Aún no se completa loop1 (aún no termina memorización de tooodas las esquinas)
             
-                Loop 'loop2                                     'Se llega aquí cuando se completa un ciclo
-                                                                
-                Set completo = Nothing                          'Vacía la lista de letras de esquinas sin revisar
+                Loop    'loop2                                  Se llega aquí cuando se completa un ciclo, regresa a paso1 
+
+               
+                'Paso4: ¿Ya se revisaron todas las esquinas?                    
+                Set completo = Nothing                          'Vacía la lista de "letras de esquinas sin revisar"
                 completo.Add vA, vA                             'Agrega esquina "A" (dirección y nombre) a la lista de esquinas sin revisar
                 completo.Add vB, vB
                 completo.Add vC, vC                             'La primer letra lleva a la dirección, aquí C=celda g4
@@ -161,75 +177,77 @@ Private Sub Solucion_Click()
                 completo.Add vW, vW
                 completo.Add vX, vX
 
-                cuantos = revisados.Count                                       'Cuantos es la cantidad de aristas revisadas
+                cuantos = revisados.Count                       'Cantidad de esquinas revisadas
             
                 For zz = 1 To cuantos
-                    On Error Resume Next                                        'Si ocurre error en siguiente linea (si ya se había eliminado la arista),checa la siguiente letra en "revisados"
-                    completo.Remove revisados(zz)                               'Elimina de la lista Completo las aristas que ya se revisaron, se usará para saber cuantas y cuáles piezas faltan de revisar
+                    On Error Resume Next                                        'Si ocurre error en siguiente linea (si ya se había eliminado esa la esquina), ignora el error y checa la siguiente.
+                    completo.Remove revisados(zz)                               'Elimina de la lista las esquinas que ya se revisaron, se usará para saber cuantas y cuáles piezas faltan de revisar
                 Next zz
 
                 If completo.Count = 0 Then                                      'Si ya no hay piezas por revisar
-                    Exit Do 'sale de loop1
+                    Exit Do 'sale de loop1 (Termina memorización y escribe en la hoja las esquinas memorizadas)
                 End If
 
-                '-----------------   4. COMIENZA SIGUIENTE CICLO DE MEMORIZACIÓN
 
+                'Paso5: Nuevo ciclo
                 Randomize                                                       'Inicializa el generador de números aleatorios de la función Rnd
-                randomNo = Int(completo.Count * Rnd) + 1                        'Número random de 1 hasta el tamaño de Completo (aristas que faltan de revisar)
+                randomNo = Int(completo.Count * Rnd) + 1                        'Número random de 1 hasta el tamaño de Completo (esquinas que faltan de revisar)
             
-                'Cuando se comienza un ciclo nuevo, se selecciona un buffer nuevo, este buffer nuevo sí se tiene que "memorizar", a diferencia de a o m
-            
+                'Cuando se comienza un ciclo nuevo, se selecciona un buffer nuevo, este buffer nuevo sí se tiene que "memorizar", a diferencia de buffer "vA"
                 pieza = completo(randomNo)                                      'Pieza será la pieza número "RandomNo" en el arreglo "Completo" (de las que faltaban de revisar)
-                buffer = pieza                                                  'El buffer es esa pieza random seleccionada.
+                buffer = pieza                                                  'El buffer nuevo es esa pieza random.
                 buf1 = Hacia(buffer)                                            'Color del nuevo buffer
-                haciaColor = buf1                                               'El color del nuevo buffer indica hacia dónde irá esa pieza(nuevo buffer).
+                haciaColor = buf1                                               'Color a donde irá el nuevo buffer
 
-                ParejaB1 = Perteneciente(buffer)(0)                             'Pareja del nuevo buffer...
+                ParejaB1 = Perteneciente(buffer)(0)                             'Parejas del nuevo buffer...
                 ParejaB2 = Perteneciente(buffer)(1)
-                pareja1 = ParejaB1                                              '...será la pareja de la pieza a analizar (buffer nuevo)
+                pareja1 = ParejaB1                                              '...serán las parejas de la pieza a analizar (buffer nuevo)
                 pareja2 = ParejaB2
-                buf2 = Hacia(ParejaB1)                                          'Color de la pareja del nuevo buffer...
+                buf2 = Hacia(ParejaB1)                                          'Color de las parejas del nuevo buffer...
                 buf3 = Hacia(ParejaB2)
-                haciaColor2 = buf2                                              '...será el color de la pieza a analizar(buffer nuevo)
+                haciaColor2 = buf2                                              '...serás el color de la pieza a analizar(buffer nuevo)
                 haciaColor3 = buf3
             
-                esquinas.Add pieza                                              'Se agrega el nuevo buffer a esquinas memorizadas
-                revisados.Add pieza                                             'Se agrega el nuevo buffer y su(s) pareja(s) a piezas revisadas.
+                esquinas.Add pieza                                  'EL NUEVO BUFFER SÍ SE MEMORIZA
+                revisados.Add pieza                                 'Se agrega el nuevo buffer y sus parejas a piezas revisadas.
                 revisados.Add pareja1
                 revisados.Add pareja2
                                                                             
-                loop1 = 1                                                           'Comienza ciclo (uno nuevo :D, dentro del paso 3)
-                nunca = 1
-            Loop 'loop1
+                loop1 = 1                                           'Ya se completó loop1 (ya se completó un ciclo)
+                loop1p1 = 1                                         'se vuelve a "encender" loop1
+            Loop 'loop1                                             'comienza un nuevo ciclo
             
 
-            '-----------------   5. TERMINA MEMORIZACIÓN Y ESCRIBE EN LA HOJA LAS ESQUINAS MEMORIZADAS
+           'Paso6: TERMINA MEMORIZACIÓN Y ESCRIBE EN LA HOJA LAS ESQUINAS MEMORIZADAS
             conteoEsquinas = esquinas.Count                              'Número de esquinas memorizadas, contando las repetidas :s
             ConteoEsquinasT = conteoEsquinas                             'Número de esquinas memorizadas, luego se reducirá si hay repetidas, y servirá para saber si hay paridad o no
 
             zzT = 1                                                      'Servirá para decrementar la posición donde se colocará la esquina memorizada, por si se repetían valores
 
+            'El for sirve porque hay esquinas que el método repite
+            'Por ejemplo puede resultar:  MOXBBCW, hay que cambiarlo a MOXCW
+            'Las letras repetidas sólo significan que esa pieza ya estaba resuelta
             For zz = 1 To conteoEsquinas
-                Set EsquinaNombre = ws.Range("N" & zzT)                  'Escribe arista por arista hacia abajo en la columna N
-                EsquinaTemp2 = ws.Range(esquinas(zz)).Value              'Guarda letra de arista actual
+                Set EsquinaNombre = ws.Range("N" & zzT)                  'Escribe esquina por esquina hacia abajo en la columna N
+                EsquinaTemp2 = ws.Range(esquinas(zz)).Value              'Guarda letra de esquina actual
                     
                 If EsquinaTemp2 = EsquinaTemp1 Then                      'Si es igual a la anterior, era repetida, entonces zzT=zzT-2
-                    zzT = zzT - 2                                             'De todas formas incrementará en 1 cuando zzT=zzT+1
-                    ConteoEsquinasT = ConteoEsquinasT - 2                     'Hay una arista repetida, entonces se eliminan las repeticiones (2)
-                Else
-                    EsquinaNombre.Value = ws.Range(esquinas(zz)).Value
-                    EsquinaTemp1 = ws.Range(esquinas(zz)).Value                'Guarda letra de arista actual, será la anterior cuando vuelva a entrar el For
+                    zzT = zzT - 2                                        'De todas formas incrementará en 1 cuando zzT=zzT+1
+                    ConteoEsquinasT = ConteoEsquinasT - 2                'Hay una esquina repetida, se eliminan del conteo las repeticiones (2)
+                Else                                                            'Si no hay repetidas
+                    EsquinaNombre.Value = ws.Range(esquinas(zz)).Value          'Sobreescribe en la celda actual la esquina no repetida
+                    EsquinaTemp1 = ws.Range(esquinas(zz)).Value          'Guarda letra de esquina actual, será la anterior cuando vuelva a entrar al For
                 End If
 
-                zzT = zzT + 1                                            'Incrementa el lugar donde se colocará la siguiente arista memorizada
+                zzT = zzT + 1                                            'Incrementa el lugar donde se colocará la siguiente esquina memorizada
             Next zz
             
-            If EsquinaTemp2 = EsquinaTemp1 Then
-                Set EsquinaNombre = ws.Range("N" & zzT)
-                EsquinaNombre.Value = ""
+            If EsquinaTemp2 = EsquinaTemp1 Then                         'Ya acabó el conteoEsquinas (incluyendo repetidas)
+                Set EsquinaNombre = ws.Range("N" & zzT)                 'Puede sobrar una repetida
+                EsquinaNombre.Value = ""                                'La borra.
             End If
             
-        '--- MÉTODO DE EJECUCIÓN
+        '--- MÉTODO DE EJECUCIÓN (escribir el algoritmo para cada letra)
             If (1 - (ConteoEsquinasT Mod 2)) = 0 Then               'Si conteoEsquinasT es Impar (0 para impar, 1 para par)
                 paridad = "ConParidad"                              'En el método, si es impar el conteo, existe "paridad"
             Else
@@ -237,13 +255,13 @@ Private Sub Solucion_Click()
             End If
 
 
-            For CountE = 1 To ConteoEsquinasT
+            For CountE = 1 To ConteoEsquinasT                       'Desde 1 hasta el número real de esquinas memorizadas (eliminadas las repetidas en el paso anterior)
                 '1 si es par, 0 si es impar
-                CountEesPar = 1 - (CountE Mod 2)                                ' Posición de esquina actual es par o impar?
-
-                If ws.Range("N" & CountE).Value = "B" Then                      ' Algoritmos de esquina B
+                CountEesPar = 1 - (CountE Mod 2)                      'Posición de esquina actual es par o impar?
+                'Los algoritmos son diferentes para esquinas pares e impares
+                    If ws.Range("N" & CountE).Value = "B" Then                      ' Algoritmos de esquina B
                         If CountEesPar = 0 Then
-                            ws.Range("O" & CountE).Value = wsA.Range("vBimpar")     '"Abimpar" es el nombre de la celda en hoja wsA="Algs Modificados"
+                            ws.Range("O" & CountE).Value = wsA.Range("vBimpar")     '"vBimpar" es el nombre de la celda en hoja wsA="Algs Modificados"
                             Else
                             ws.Range("O" & CountE).Value = wsA.Range("vBpar")
                         End If
@@ -405,14 +423,10 @@ Private Sub Solucion_Click()
             ws.Range("R2").Copy
             ws.Range("R2").PasteSpecial xlPasteValues                 'Lo pega ahí mismo para que aparezca como valores y no como fórmula.
             ws.Range("A1").Select
-            
+
+
+
     'Solución de aristas
-            '**Variables, etc
-                                                                'es Variant porque también se puede referir a su ubicación, ej a="h6"
-                Dim Pareja                  As Variant              'Pareja(perteneciente) de PIEZA
-                Dim Aristas                 As New Collection       'Lista de PIEZAs (aristas) "memorizadas"
-                Set wsA = Worksheets("Algs Modificados")            'wsA es la hoja que contiene tooodos los algoritmos
-                Set ws = Worksheets("Simulación_Aristas")
 
             'Comienza Memorización aristas
             EsquinasMemo = 0
@@ -434,59 +448,62 @@ Private Sub Solucion_Click()
             Set revisados = Nothing
 
             loop1 = 0                                                           'Comienza ciclo (uno nuevo :D, dentro del paso 3)
-            nunca = 0
+            loop1p1 = 1
 
-            Do  'loop1 esquinas
-                Do 'loop 2 esquinas
-                    Do While nunca = 0              'loop 1.1 esquinas
+            Do                                        'loop1 
+                Do                                    'loop 2 
+                    Do While loop1p1 = 1              'loop 1.1 
 
                         If loop1 = 1 Then
                             Exit Do                  'sale de loop1.1
                         End If
                 
-                        haciaColor = Hacia(pieza)        'Función "Hacia" regresa el color actual de PIEZA
-                        Pareja = Perteneciente(pieza)    'Perteneciente de PIEZA devuelve letra pareja de PIEZA. Ej: para "a" es "m"
-                        haciaColor2 = Hacia(Pareja)      'Función "Hacia" regresa el color actual de Pareja
+                        haciaColor = Hacia(pieza)         'Función "Hacia" regresa el color actual de PIEZA
+                        Pareja1 = Perteneciente(pieza)    'Perteneciente de PIEZA devuelve letra pareja de PIEZA. Ej: para "a" es "m"
+                        haciaColor2 = Hacia(Pareja1)      'Función "Hacia" regresa el color actual de Pareja
                         
-                        revisados.Add pieza              'Se agregar PIEZA y Pareja a la lista de "Revisados"
-                        revisados.Add Pareja
+                        revisados.Add pieza               'Se agregar PIEZA y Pareja a la lista de "Revisados"
+                        revisados.Add Pareja1
 
                         If (haciaColor = buf1 And haciaColor2 = buf2) _
-                            Or (haciaColor = buf2 And haciaColor2 = buf1) Then  'Si los colores en el buffer SON los colores del buffer
-                            rompe = 1
+                            Or (haciaColor = buf2 And haciaColor2 = buf1) Then  
+                            'Si los colores en el buffer SON los colores del buffer
+                            rompeCiclo = 1
                             Exit Do
                         End If
 
-                        nunca = 1
-                    Loop 'loop 1.1 esquinas
+                        loop1p1 = 0
+                    Loop 'loop 1.1 
                 
-                    If rompe = 1 Then
-                        rompe = 0
+                    If rompeCiclo = 1 Then
+                        rompeCiclo = 0
                         Exit Do 'salir de loop2
                     End If
-                    '---------------------------------------------------------------------------------------
-                    '                         3. COMIENZA CICLO DE "MEMORIZACIÓN"
-                    posible = Posibles(haciaColor)                  'La función "Posibles" devuelve las piezas donde podría ir la pieza que está en el buffer
-                    cc = 0                                                  'cc=0 para revisar la primer pieza de Posibles(), el arreglo va de 0-3 (4piezas en la cara)
-                    loop3 = 0
+
+                    'Comienza ciclo de memorización
+                    posible = Posibles(haciaColor)             'La función "Posibles" devuelve las piezas donde podría ir la pieza que está en el buffer
+                    cc = 0                                     'cc=0 para revisar la primer pieza de Posibles(), el arreglo va de 0-3 (4piezas en la cara)
+                    loop3 = 1
                     
-                    Do While loop3 = 0 'loop3 esquinas
+                    Do While loop3 = 1 'loop3 esquinas
                     
-                        parejaTemp = Perteneciente(posible(cc))             'Pareja temporal es la pareja de la 1era, 2da, 3era o 4ta pieza del arreglo "Posibles()"
-                        haciaColorTemp2 = centro(parejaTemp)      'Color de la pareja temporal a donde podría ir la pieza que está en el buffer
-                        If haciaColorTemp2 <> haciaColor2 Then              'Si el color de la pareja de PIEZA no es igual al color de la pareja de Posible
+                        parejaTemp1 = Perteneciente(posible(cc))             'Pareja temporal es la pareja de la 1era, 2da, 3era o 4ta pieza del arreglo "Posibles()"
+                        haciaColorTemp1 = centro(parejaTemp1)      'Color de la pareja temporal a donde podría ir la pieza que está en el buffer
+                        
+                        If haciaColorTemp1 <> haciaColor2 Then              'Si el color de la pareja de PIEZA no es igual al color de la pareja de Posible
                             cc = cc + 1                                        'Incrementa el contador en 1 para checar la siguiente pieza en "Posibles()"
-                            loop3 = 0       'Para repetir el loop3
+                            loop3 = 1       'Para repetir el loop3
                         Else
-                            loop3 = 1       'Para salir del loop3
+                            loop3 = 0       'Para salir del loop3
                         End If
+
                     Loop 'loop3
             
                     Aristas.Add posible(cc)                                   'Agrega la pieza posible a la lista de Aristas memorizadas.
                     pieza = posible(cc)                                       'Ahora se revisará a dónde va esta nueva pieza
 
                     loop1 = 0                                                           'Comienza ciclo (uno nuevo :D, dentro del paso 3)
-                    nunca = 0
+                    loop1p1 = 1
                 Loop 'loop2 esquinas
             
                 Set completo = Nothing                                  'Vacía la lista de letras de aristas sin revisar
@@ -515,20 +532,18 @@ Private Sub Solucion_Click()
                 completo.Add w, w
                 completo.Add x, x
 
-
-                cuantos = revisados.Count                                       'Cuantos es la cantidad de aristas revisadas
+                cuantos = revisados.Count                           'Cuantos es la cantidad de aristas revisadas
                 
                 For zz = 1 To cuantos
-                    On Error Resume Next                                        'Si ocurre error en siguiente linea (si ya se había eliminado la arista) checa la siguiente letra en Revisados
-                    completo.Remove revisados(zz)                               'Elimina de la lista Completo las aristas que ya se revisaron,                                                                  
-                Next zz                                                         'Se usará para saber cuantas y cuáles piezas faltan de revisar.
+                    On Error Resume Next                            'Si ocurre error en siguiente linea (si ya se había eliminado la arista) checa la siguiente letra en Revisados
+                    completo.Remove revisados(zz)                   'Elimina de la lista las aristas que ya se revisaron,                                                                  
+                Next zz                                                         
 
-                If completo.Count = 0 Then                                      'Si ya no hay piezas por revisar
-                    Exit Do 'sale de loop 1 esquinas
+                If completo.Count = 0 Then                          'Si ya no hay aristas por revisar
+                    Exit Do 'sale de loop1, TERMINA MEMO y escribe en la hoja las aristas memorizadas
                 End If
 
-                '-------------------------------------------------------------------------------------------------
-                '                                      4. COMIENZA SIGUIENTE CICLO DE MEMORIZACIÓN
+                'Comienza siguiente ciclo de memorización
                 
                 Randomize                                                       'Inicializa el generador de números aleatorios de la función Rnd
                 randomNo = Int(completo.Count * Rnd) + 1                        'Número random de 1 hasta el tamaño de Completo (aristas que faltan de revisar)
@@ -539,29 +554,29 @@ Private Sub Solucion_Click()
                 buf1 = Hacia(buffer)                                            'Color del nuevo buffer
                 haciaColor = buf1                                               'El color del nuevo buffer indica hacia dónde irá esa pieza(nuevo buffer).
 
-                parejaB = Perteneciente(buffer)                                 'Pareja del nuevo buffer..
-                Pareja = parejaB                                                '.. será la pareja de la pieza a analizar (buffer nuevo)
-                buf2 = Hacia(parejaB)                                           'Color de la pareja del nuevo buffer...
+                parejaB1 = Perteneciente(buffer)                                 'Pareja del nuevo buffer..
+                Pareja1 = parejaB1                                                '.. será la pareja de la pieza a analizar (buffer nuevo)
+                buf2 = Hacia(parejaB1)                                           'Color de la pareja del nuevo buffer...
                 haciaColor2 = buf2                                              '...será el color de la pieza a analizar(buffer nuevo)
 
                 Aristas.Add pieza                                               'Se agrega el nuevo buffer a aristas memorizadas
                 revisados.Add pieza                                             'Se agrega el nuevo buffer y su pareja a piezas revisadas.
-                revisados.Add Pareja
+                revisados.Add Pareja1
                 
                 loop1 = 1                                                           'Comienza ciclo (uno nuevo :D, dentro del paso 3)
-                nunca = 1
+                loop1p1 = 1
 
-            Loop 'loop1 esquinas
+            Loop 'loop1 
 
             '---------TERMINA MEMORIZACIÓN Y ESCRIBE EN LA HOJA LAS ARISTAS MEMORIZADAS
 
             ConteoAristas = Aristas.Count                                   'Número de aristas memorizadas, contando las repetidas :s
-            ConteoAristasT = ConteoAristas                                  'Número de aristas memorizadas, luego se reducirá si hay repetidas, y servirá
-                                                                            'para saber si hay paridad o no
-            zzT = 1                                                         'Servirá para decrementar la posición donde se colocará la arista memorizada
-                                                                            'Si es que se repetían valores
+            ConteoAristasT = ConteoAristas                                  'Número de aristas memorizadas, luego se reducirá si hay repetidas, y servirá para saber si hay paridad o no
+           
+            zzT = 1                                                         'Servirá para decrementar la posición donde se colocará la arista memorizada, Si es que se repetían valores
+           
             For zz = 1 To ConteoAristas
-                Set aristaNombre = ws.Range("N" & zzT + ConteoEsquinasT)                     'Escribe arista por arista hacia abajo en la columna N
+                Set aristaNombre = ws.Range("N" & zzT + ConteoEsquinasT)     'Escribe arista por arista hacia abajo en la columna N
                 AristaTemp2 = ws.Range(Aristas(zz)).Value                    'Guarda letra de arista actual
                     
                 If AristaTemp2 = AristaTemp1 Then                            'Si es igual a la anterior, zzT=zzT-1
@@ -570,7 +585,8 @@ Private Sub Solucion_Click()
                 Else
                     aristaNombre.Value = ws.Range(Aristas(zz)).Value         'Si solo se ponia Aristas(zT), escribiría la celda y no la letra
                     AristaTemp1 = ws.Range(Aristas(zz)).Value                'Guarda letra de arista actual, será la anterior cuando vuelva a entrar el For
-                End If   
+                End If 
+
                 zzT = zzT + 1                                                    'Incrementa el lugar donde se colocará la siguiente arista memorizada  
             Next zz
             
@@ -747,9 +763,7 @@ Private Sub Solucion_Click()
                         ws.Range("O" & countA + ConteoEsquinasT).Value = wsA.Range("Axpar")
                     End If
                 End If
-                
-                'If CountA = ConteoAristasT And Paridad = "ConParidad" Then       'Si ya se colocaron todos los algoritmos de aristas "memorizadas"
-                
+                               
                 If (countA = ConteoAristasT) And (paridad = "ConParidad") Then    'Si ya se colocaron todos los algoritmos de aristas "memorizadas"
                                                                                     'y si hay paridad
                     ws.Range("O" & countA + ConteoEsquinasT + 1).Value = wsA.Range("Paridad")   'Colocar abajo el algoritmo de paridad
@@ -762,9 +776,9 @@ Private Sub Solucion_Click()
             ws.Range("R2").Formula = "=CONCAT(O:O)"                   'Escribe el algoritmo entero para resolver el cubo en celda R2
             ws.Range("R2").Copy
             ws.Range("R2").PasteSpecial xlPasteValues                 'Lo pega ahí mismo para que aparezca como valores y no como fórmula.
-            ws.Range("A1").Select
+            ws.Range("A1").select
 
-    '----------OTROS: Conteo de giros necesarios para resolver el cubo con éste método
+    'OTROS: Conteo de giros necesarios para resolver el cubo con éste método
 
         Dim Algoritmo As String
         Dim GirosEnAlgoritmo As Long
