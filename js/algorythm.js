@@ -113,6 +113,7 @@ function pasoEsquinas() {
         }
     }
     esquinasMemo.remove(esquinaRepetida);
+    esquinasMemo.remove(esquinaRepetida);
     console.log(esquinasMemo);
 }
 
