@@ -107,13 +107,25 @@ function pasoEsquinas() {
         flag = true;
     }
     var esquinaRepetida;
-    for (var i in esquinasMemo){
+    var esquinaRepetida1;
+    var esquinasMemoT;
+    var j;
+
+    j=1;
+    esquinasMemoT=esquinasMemo.length;
+    
+     for (i = 1; j < esquinasMemoT; i++){
+         j=j+1;
         if (esquinasMemo[i] == esquinasMemo[i-1]){
             esquinaRepetida = esquinasMemo[i];
+            esquinaRepetida1 = esquinasMemo[i-1];
+              esquinasMemo.remove(esquinaRepetida);
+              esquinasMemo.remove(esquinaRepetida1);
+              i=i-2;
         }
+        
     }
-    esquinasMemo.remove(esquinaRepetida);
-    esquinasMemo.remove(esquinaRepetida);
+
     console.log(esquinasMemo);
 }
 
