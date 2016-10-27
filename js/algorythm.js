@@ -60,7 +60,7 @@ function pasoEsquinas() {
                     || (haciaColor == buf2 && haciaColor2 == buf3 && haciaColor3 == buf1)
                     || (haciaColor == buf3 && haciaColor2 == buf1 && haciaColor3 == buf2)
                     || (haciaColor == buf3 && haciaColor2 == buf2 && haciaColor3 == buf1))) {
-                        break cicloMemo; //rompe ciclo de memorizacion
+                    break cicloMemo; //rompe ciclo de memorizacion
                 }
             }
 
@@ -85,7 +85,7 @@ function pasoEsquinas() {
         listaEsquinas = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X];
         for (var pza in revisados) {
             listaEsquinas.remove(revisados[pza]);
-        }   
+        }
         if (listaEsquinas.length == 0) {
             break memoEsquinas; //rompe el loop principal en caso de que el arreglo ya no tenga piezas por revisar
         }
@@ -106,27 +106,23 @@ function pasoEsquinas() {
         revisados.push(pareja2);
         flag = true;
     }
-    var esquinaRepetida;
-    var esquinaRepetida1;
-    var esquinasMemoT;
-    var j;
-
-    j=1;
-    esquinasMemoT=esquinasMemo.length;
-    
-     for (i = 1; j < esquinasMemoT; i++){
-         j=j+1;
-        if (esquinasMemo[i] == esquinasMemo[i-1]){
+    console.log('Arreglo original: ' + esquinasMemo);
+    var esquinasRepetidas = [];
+    for (var i in esquinasMemo) {
+        var esquinaRepetida;
+        if (esquinasMemo[i] == esquinasMemo[i - 1]) {
             esquinaRepetida = esquinasMemo[i];
-            esquinaRepetida1 = esquinasMemo[i-1];
-              esquinasMemo.remove(esquinaRepetida);
-              esquinasMemo.remove(esquinaRepetida1);
-              i=i-2;
+            esquinasRepetidas.push(esquinaRepetida);
         }
-        
-    }
 
-    console.log(esquinasMemo);
+    }
+    for (var i in esquinasRepetidas) {
+        esquinasMemo.remove(esquinasRepetidas[i]);
+        esquinasMemo.remove(esquinasRepetidas[i]);
+    }
+    console.log('Letras repetidas: ' + esquinasRepetidas);
+    console.log('Arreglo sin letras repetidas: ' + esquinasMemo);
+    console.log(getAlgsByArray(esquinasMemo));
 }
 
 
