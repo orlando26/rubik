@@ -1,10 +1,10 @@
 var FACES = {
-    front: {M:"yellow", p:"yellow", P:"orange", m:"white", CF:"green", o:"orange", N:"blue", n:"white", O:"orange"},
-    back: {E:"blue", h:"blue", H:"red", e:"yellow", CB:"blue", g:"red", F:"red", f:"orange", G:"orange"},
-    up: {C:"yellow", b:"white", B:"blue", c:"orange", CU:"white", a:"blue", D:"white", d:"green", A:"orange",},
-    down: {U:"green", x:"red", X:"green", u:"blue", CD:"yellow", w:"green", V:"white", v:"red", W:"green",},
-    left: {I:"green", l:"green", L:"white", i:"green", CL:"orange", k:"yellow", J:"red", j:"blue", K:"yellow",},
-    right: {Q:"yellow", t:"orange", T:"blue", q:"yellow", CR:"red", s:"white", R:"red", r:"red", S:"white",}
+    front: { M: "yellow", p: "yellow", P: "orange", m: "white", CF: "green", o: "orange", N: "blue", n: "white", O: "orange" },
+    back: { G: "blue", f: "blue", F: "red", g: "yellow", CB: "blue", e: "red", H: "red", h: "orange", E: "orange" },
+    up: { C: "yellow", b: "white", B: "blue", c: "orange", CU: "white", a: "blue", D: "white", d: "green", A: "orange", },
+    down: { U: "green", x: "red", X: "green", u: "blue", CD: "yellow", w: "green", V: "white", v: "red", W: "green", },
+    left: { I: "green", l: "green", L: "white", i: "green", CL: "orange", k: "yellow", J: "red", j: "blue", K: "yellow", },
+    right: { Q: "yellow", t: "orange", T: "blue", q: "yellow", CR: "red", s: "white", R: "red", r: "red", S: "white", }
 };
 
 YUI.add('rubik-simple', function(Y) {
@@ -166,8 +166,8 @@ YUI.add('rubik-simple', function(Y) {
         _setInitialColors: function() {
             for (var face in INIT_CONFIG) {
                 var faceArr = [];
-                for(var key in FACES[face]){
-                    faceArr.push(FACES[face][key]);    
+                for (var key in FACES[face]) {
+                    faceArr.push(FACES[face][key]);
                 }
                 Y.one('.' + INIT_CONFIG[face][0] + '.' + face + ' > div').addClass(faceArr[0]);
                 Y.one('.' + INIT_CONFIG[face][1] + '.' + face + ' > div').addClass(faceArr[1]);

@@ -46,7 +46,6 @@ $(function() {
         console.log('Letras memorizadas: ' + letrasMemo);
         var algsArray = getAlgsByArray(esquinasMemo);
         console.log('Algoritmos : ' + algsArray);
-        var simpleNotationMovs = ["R'", "D'", "R", "D"];
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
