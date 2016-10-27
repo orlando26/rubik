@@ -28,6 +28,10 @@ function solucionCubo(){
     var posible;
     var flag = false;
     var listaEsquinas = []; //lista de esquinas que faltan por revisar
+    var parejaTemp1;
+    var parejaTemp2;
+
+    pAristas = false;
 
     /**
      * loop principal. se repetira hasta que no existan piezas en el arreglo
