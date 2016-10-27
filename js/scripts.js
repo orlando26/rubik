@@ -255,7 +255,7 @@ function perteneciente(letter){
     @return: posibles[] */
 function posibles(color){
     var posibles = [];
-    if (aristasMemo){
+    if (pAristas==true){
         switch(color){
             case 'white': posibles = [a, b, c, d];break;
             case 'blue': posibles = [e, f, g, h];break;
