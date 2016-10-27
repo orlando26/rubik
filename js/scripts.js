@@ -37,7 +37,24 @@ $(function() {
         }
     });
 
+    $('#girarTest').click(function() {
+        solucionEsquinas();
+        solucionAristas();
+        var letrasMemo = [];
+        letrasMemo = letrasMemo.concat(esquinasMemo);
+        letrasMemo = letrasMemo.concat(aristasMemo);
+        console.log('Letras memorizadas: ' + letrasMemo);
+        var algsArray = getAlgsByArray(esquinasMemo);
+        console.log('Algoritmos : ' + algsArray);
+        var simpleNotationMovs = ["R'", "D'", "R", "D"];
 
+        if (algsArray.length != 0) {
+            var movsArr = makeMovementsArray(algsArray);
+            //cube._solve(movsArr);
+            //console.log('si entro');
+        }
+
+    });
 
     $('#statebtn').click(function() {
         if (typeof Android != "undefined") {
@@ -255,7 +272,7 @@ function perteneciente(letter) {
     @return: posibles[] */
 function posibles(color) {
     var posibles = [];
-    if (aristasMemo) {
+    if (pAristas == true) {
         switch (color) {
             case 'white': posibles = [a, b, c, d]; break;
             case 'blue': posibles = [e, f, g, h]; break;
@@ -294,7 +311,7 @@ function randomInt(min, max) {
 function getAlgsByArray(arr) {
     var algs = [];
     for (var i in arr) {
-        algs = algs.concat(getAlgsByLetter(arr[i], i%2));
+        algs = algs.concat(getAlgsByLetter(arr[i], i % 2));
     }
     return algs;
 }
@@ -303,103 +320,103 @@ function getAlgsByLetter(letter, type) {
     var algs = [];
     switch (letter) {
         case 'B':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R", "B'", "R", "F2", "R'", "B", "R", "F2", "R2"] : ["R2", "F2", "R'", "B'", "R", "F2", "R'", "B", "R'"];
             break;
         case 'C':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R2", "B2", "R", "F", "R'", "B2", "R", "F'", "R"] : ["R'", "F", "R'", "B2", "R", "F'", "R'", "B2", "R2"];
             break;
         case 'D':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 [] : [];
             break;
         case 'E':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U2", "L", "U2", "R'", "U", "F2", "R'", "F2", "R", "U2", "L'", "U", "R"]
                 : ["U2'", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"];
             break;
         case 'F':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R'", "L'", "F'", "R", "B2", "R'", "F", "R", "B2", "L"] :
                 ["L'", "B2", "R'", "F'", "R", "B2", "R'", "F", "R", "L"];
             break;
         case 'G':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U'", "B'", "R'", "B", "L", "B'", "R", "B", "L'", "U"] :
                 ["U'", "L", "B'", "R'", "B", "L'", "B'", "R", "B", "U"];
             break;
         case 'H':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["B2", "L", "B'", "R", "B", "L'", "B'", "R'", "B'"] :
                 ["B", "R", "B", "L", "B'", "R'", "B", "L'", "B2"];
             break;
         case 'I':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R'", "F'", "R", "B'", "R'", "F", "R", "B"] : ["L", "F'", "L'", "B", "L", "F", "L'", "B'"];
             break;
         case 'J':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["F", "R", "B", "R'", "F'", "R", "B'", "R'"] : ["R", "B", "R'", "F", "R", "B'", "R'", "F'"];
             break;
         case 'K':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R", "B'", "R", "F'", "R'", "B", "R", "F", "R2"] : ["R2", "F'", "R'", "B'", "R", "F", "R'", "B", "R'"];
             break;
         case 'L':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R'", "F", "R'", "B", "R", "F'", "R'", "B'", "R2"] : ["R2", "B", "R", "F", "R'", "B'", "R", "F'", "R"];
             break;
         case 'M':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["L", "F2", "R", "B", "R'", "F2", "R", "B'", "R'", "L'"] :
                 ["R", "L", "B", "R'", "F2", "R", "B'", "R'", "F2", "L'"];
             break;
         case 'N':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 [] : [];
             break;
         case 'O':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["F'", "R'", "F'", "L'", "F", "R", "F'", "L", "F2"] : ["F2", "L'", "F", "R'", "F'", "L", "F", "R", "F"];
             break;
         case 'P':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U", "L'", "F", "R", "F'", "L", "F", "R'", "F'", "U'"] : ["U", "F", "R", "F'", "L'", "F", "R'", "F'", "L", "U'"];
             break;
         case 'Q':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 [] : [];
             break;
         case 'R':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U2", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"] :
                 ["U2", "L", "U2", "R'", "U", "F2", "R'", "F2", "R", "U2", "L'", "U", "R"];
             break;
         case 'S':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R'", "F'", "R", "B", "R'", "F", "R", "B'"] : ["B", "R'", "F'", "R", "B'", "R'", "F", "R"];
             break;
         case 'T':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["F'", "R", "B", "R'", "F", "R", "B'", "R'"] : ["R", "B", "R'", "F'", "R", "B'", "R'", "F"];
             break;
         case 'U':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["F2", "R", "B", "R'", "F2", "R", "B'", "R'"] : ["R", "B", "R'", "F2", "R", "B'", "R'", "F2"];
             break;
         case 'V':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U2", "L'", "B'", "L", "F2", "L'", "B", "L", "F2", "U2"] :
                 ["U2", "F2", "L'", "B'", "L", "F2", "L'", "B", "L", "U2"];
             break;
         case 'W':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["U", "F'", "L'", "F", "R2", "F'", "L", "F", "R2", "U'"] :
                 ["U", "R2", "U'", "F", "U", "F'", "R2", "F", "U'", "F'"];
             break;
         case 'X':
-            algs = type == 0 ?
+            algs = type != 0 ?
                 ["R'", "F'", "R", "B2", "R'", "F", "R", "B2"] :
                 ["B2", "R'", "F'", "R", "B2", "R'", "F", "R"];
             break;

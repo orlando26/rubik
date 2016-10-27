@@ -4,7 +4,7 @@ var FACES = {
     up: {C:"yellow", b:"white", B:"blue", c:"orange", CU:"white", a:"blue", D:"white", d:"green", A:"orange",},
     down: {U:"green", x:"red", X:"green", u:"blue", CD:"yellow", w:"green", V:"white", v:"red", W:"green",},
     left: {I:"green", l:"green", L:"white", i:"green", CL:"orange", k:"yellow", J:"red", j:"blue", K:"yellow",},
-    right: {Q:"yellow", t:"orange", T:"blue", q:"white", CR:"red", s:"white", R:"red", r:"red", S:"white",}
+    right: {Q:"yellow", t:"orange", T:"blue", q:"yellow", CR:"red", s:"white", R:"red", r:"red", S:"white",}
 };
 
 YUI.add('rubik-simple', function(Y) {
