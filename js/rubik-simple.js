@@ -1,10 +1,10 @@
 var FACES = {
-    front: {M:"blue", p:"blue", P:"blue", m:"blue", CF:"blue", o:"blue", N:"blue", n:"blue", O:"blue"},
-    back: {E:"green", h:"green", H:"green", e:"green", CB:"green", g:"green", F:"green", f:"green", G:"green"},
-    up: {C:"yellow", b:"yellow", B:"yellow", c:"yellow", CU:"yellow", a:"yellow", D:"yellow", d:"yellow", A:"yellow",},
-    down: {U:"white", x:"white", X:"white", u:"white", CD:"white", w:"white", V:"white", v:"white", W:"white",},
-    left: {I:"red", l:"red", L:"red", i:"red", CL:"red", k:"red", J:"red", j:"red", K:"red",},
-    right: {Q:"orange", t:"orange", T:"orange", q:"orange", CR:"orange", s:"orange", R:"orange", r:"orange", S:"orange",}
+    front: {M:"yellow", p:"yellow", P:"orange", m:"white", CF:"green", o:"orange", N:"blue", n:"white", O:"orange"},
+    back: {E:"blue", h:"blue", H:"red", e:"yellow", CB:"blue", g:"red", F:"red", f:"orange", G:"orange"},
+    up: {C:"yellow", b:"white", B:"blue", c:"orange", CU:"white", a:"blue", D:"white", d:"green", A:"orange",},
+    down: {U:"green", x:"red", X:"green", u:"blue", CD:"yellow", w:"green", V:"white", v:"red", W:"green",},
+    left: {I:"green", l:"green", L:"white", i:"green", CL:"orange", k:"yellow", J:"red", j:"blue", K:"yellow",},
+    right: {Q:"yellow", t:"orange", T:"blue", q:"yellow", CR:"red", s:"white", R:"red", r:"red", S:"white",}
 };
 
 YUI.add('rubik-simple', function(Y) {
