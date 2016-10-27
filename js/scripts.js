@@ -292,9 +292,11 @@ function randomInt(min, max) {
 }
 
 function getAlgsByArray(arr) {
+    var algs = [];
     for (var i in arr) {
-
+        algs = algs.concat(getAlgsByLetter(arr[i], i%2));
     }
+    return algs;
 }
 
 function getAlgsByLetter(letter, type) {
@@ -306,7 +308,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'C':
             algs = type == 0 ?
-                ["R2", "B2", "R", "F", "R'", "B2", "R", "F'", "R"] : ["R'", "F", "R'", "B2'", "R", "F'", "R'", "B2", "R2"];
+                ["R2", "B2", "R", "F", "R'", "B2", "R", "F'", "R"] : ["R'", "F", "R'", "B2", "R", "F'", "R'", "B2", "R2"];
             break;
         case 'D':
             algs = type == 0 ?
@@ -314,22 +316,22 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'E':
             algs = type == 0 ?
-                ["U2", "L", "U2", "R'", "U", "F2", "R'", "F2'", "R", "U2", "L'", "U", "R"]
-                :["U2'", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"];
+                ["U2", "L", "U2", "R'", "U", "F2", "R'", "F2", "R", "U2", "L'", "U", "R"]
+                : ["U2'", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"];
             break;
         case 'F':
             algs = type == 0 ?
-                ["R'", "L'", "F'", "R", "B2", "R'", "F", "R", "B2", "L"] : 
+                ["R'", "L'", "F'", "R", "B2", "R'", "F", "R", "B2", "L"] :
                 ["L'", "B2", "R'", "F'", "R", "B2", "R'", "F", "R", "L"];
             break;
         case 'G':
             algs = type == 0 ?
-                ["U'", "B'", "R'", "B", "L", "B'", "R", "B", "L'", "U"] : 
+                ["U'", "B'", "R'", "B", "L", "B'", "R", "B", "L'", "U"] :
                 ["U'", "L", "B'", "R'", "B", "L'", "B'", "R", "B", "U"];
             break;
         case 'H':
             algs = type == 0 ?
-                ["B2", "L", "B'", "R", "B", "L'", "B'", "R'", "B'"] : 
+                ["B2", "L", "B'", "R", "B", "L'", "B'", "R'", "B'"] :
                 ["B", "R", "B", "L", "B'", "R'", "B", "L'", "B2"];
             break;
         case 'I':
@@ -350,7 +352,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'M':
             algs = type == 0 ?
-                ["L", "F2", "R", "B", "R'", "F2", "R", "B'", "R'", "L'"] : 
+                ["L", "F2", "R", "B", "R'", "F2", "R", "B'", "R'", "L'"] :
                 ["R", "L", "B", "R'", "F2", "R", "B'", "R'", "F2", "L'"];
             break;
         case 'N':
@@ -371,7 +373,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'R':
             algs = type == 0 ?
-                ["U2", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"] : 
+                ["U2", "R", "B", "R'", "B2", "L", "U2", "L'", "U2", "B", "R'", "U2", "R"] :
                 ["U2", "L", "U2", "R'", "U", "F2", "R'", "F2", "R", "U2", "L'", "U", "R"];
             break;
         case 'S':
@@ -388,20 +390,21 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'V':
             algs = type == 0 ?
-                ["U2", "L'", "B'", "L", "F2", "L'", "B", "L", "F2", "U2"] : 
+                ["U2", "L'", "B'", "L", "F2", "L'", "B", "L", "F2", "U2"] :
                 ["U2", "F2", "L'", "B'", "L", "F2", "L'", "B", "L", "U2"];
             break;
         case 'W':
             algs = type == 0 ?
-                ["U", "F'", "L'", "F", "R2", "F'", "L", "F", "R2", "U'"] : 
+                ["U", "F'", "L'", "F", "R2", "F'", "L", "F", "R2", "U'"] :
                 ["U", "R2", "U'", "F", "U", "F'", "R2", "F", "U'", "F'"];
             break;
         case 'X':
             algs = type == 0 ?
-                ["U", "F'", "L'", "F", "R2", "F'", "L", "F", "R2", "U'"] : 
-                ["U", "R2", "U'", "F", "U", "F'", "R2", "F", "U'", "F'"];
+                ["R'", "F'", "R", "B2", "R'", "F", "R", "B2"] :
+                ["B2", "R'", "F'", "R", "B2", "R'", "F", "R"];
             break;
     }
+    return algs;
 }
 
 

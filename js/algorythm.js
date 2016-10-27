@@ -121,6 +121,7 @@ function pasoEsquinas() {
     }
     console.log('Letras repetidas: ' + esquinasRepetidas);
     console.log('Arreglo sin letras repetidas: ' + esquinasMemo);
+    console.log(getAlgsByArray(esquinasMemo));
 }
 
 
