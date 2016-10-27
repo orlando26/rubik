@@ -50,10 +50,8 @@ $(function() {
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
-            //cube._solve(movsArr);
-            //console.log('si entro');
+            cube._solve(movsArr);
         }
-
     });
 
     $('#statebtn').click(function() {
@@ -165,8 +163,16 @@ function getMovement(move) {
 function makeMovementsArray(array) {
     var movementsArray = [];
     array.forEach(function(element) {
-        var move = getMovement(element);
-        movementsArray.push(move);
+        var move;
+        if (element.indexOf(2) != -1) {
+            move = getMovement(element.replace("2", ""));
+            movementsArray.push(move);
+            movementsArray.push(move);
+        } else {
+            move = getMovement(element);
+            movementsArray.push(move);
+        }
+
     });
     return movementsArray;
 }
