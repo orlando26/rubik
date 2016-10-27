@@ -117,7 +117,7 @@ function pasoEsquinas() {
     }
     for(var i in esquinasRepetidas){
         esquinasMemo.remove(esquinasRepetidas[i]);
-        esquinasMemo.remove(esquinasRepetidas[i]);
+        esquinasMemo.remove(esquinasRepetidas[i]); 
     }
     console.log('Letras repetidas: ' + esquinasRepetidas);
     console.log('Arreglo sin letras repetidas: ' + esquinasMemo);
