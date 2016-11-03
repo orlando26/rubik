@@ -314,13 +314,8 @@ YUI.add('rubik-simple', function(Y) {
 
                 default: break;
             }
-
-            if (movement.face == "U") cubeMove = movement.rotate == "left" ? "U" : "U'";
-            if (movement.face == "D") cubeMove = movement.rotate == "left" ? "D'" : "D";
-            if (movement.face == "R") cubeMove = movement.rotate == "left" ? "R" : "R'";
-            if (movement.face == "L") cubeMove = movement.rotate == "left" ? "L'" : "L";
-            if (movement.face == "B") cubeMove = movement.rotate == "left" ? "B" : "B'";
-            if (movement.face == "F") cubeMove = movement.rotate == "left" ? "F'" : "F";
+            
+            cubeMove = getMovementOriginalNotation(movement);
 
             if (movement && movement.face != "C") {
                 this._doMovement(movement);
@@ -354,13 +349,20 @@ YUI.add('rubik-simple', function(Y) {
             this._solving = Y.later(350, this, function() {
                 this._expectingTransition = true;
                 this._doMovement(moves[i]);
-                if (i == moves.length - 1) this._solving.cancel();
+                console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
+                if (i == moves.length - 1) {
+                    this._solving.cancel();
+                    console.log('Solving finished');
+                }
                 i++;
             }, null, true);
         },
 
         _doMovement: function(m, fromQueue) {
-            if (this._moving) return;//we cancel if there is some movement going on
+            if (this._moving) {
+                console.log('Se cancelo D:');
+                return;//we cancel if there is some movement going on
+            }
             var plane = this._plane,
                 list = Y.all('.' + m.face + m.slice);
             this._movement = m;
@@ -413,3 +415,14 @@ YUI.add('rubik-simple', function(Y) {
 }, "0.0.1", {
         requires: ['yui-later', 'node', 'transition', 'event', 'event-delegate', 'event-gestures']
     });
+
+function getMovementOriginalNotation(movement) {
+    var cubeMove;
+    if (movement.face == "U") cubeMove = movement.rotate == "left" ? "U" : "U'";
+    if (movement.face == "D") cubeMove = movement.rotate == "left" ? "D'" : "D";
+    if (movement.face == "R") cubeMove = movement.rotate == "left" ? "R" : "R'";
+    if (movement.face == "L") cubeMove = movement.rotate == "left" ? "L'" : "L";
+    if (movement.face == "B") cubeMove = movement.rotate == "left" ? "B" : "B'";
+    if (movement.face == "F") cubeMove = movement.rotate == "left" ? "F'" : "F";
+    return cubeMove;
+}

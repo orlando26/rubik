@@ -1,3 +1,4 @@
+/**file:///home/orlando/Documents/git_proyects/rubik/index.html */
 var yellow = "rgb(255, 255, 0)";
 var red = "rgb(255, 0, 0)";
 var green = "rgb(0, 255, 0)";
@@ -138,7 +139,7 @@ function getMovement(move) {
             movement = { face: "R", slice: "M", rotate: "right" };
             break;
         case "L":
-            movement = { face: "L", slice: "M", rotate: "Right" };
+            movement = { face: "L", slice: "M", rotate: "right" };
             break;
         case "L'":
             movement = { face: "L", slice: "M", rotate: "left" };
