@@ -346,7 +346,7 @@ YUI.add('rubik-simple', function(Y) {
         _solve: function(moves) {
             console.log('attemp to solve');
             var i = 0;
-            this._solving = Y.later(350, this, function() {
+            this._solving = Y.later(500, this, function() {
                 this._expectingTransition = true;
                 this._doMovement(moves[i]);
                 console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
