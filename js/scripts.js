@@ -326,8 +326,8 @@ function getAlgsByLetter(letter, type) {
     var algs = [];
     switch (letter) {
         case 'B':
-            algs = type != 0 ?
-                ["R", "B'", "R", "F2", "R'", "B", "R", "F2", "R2"] : ["R2", "F2", "R'", "B'", "R", "F2", "R'", "B", "R'"];
+            algs = type != 0 ? 
+            ["R", "B'", "R", "F2", "R'", "B", "R", "F2", "R2"] : ["R2", "F2", "R'", "B'", "R", "F2", "R'", "B", "R'"];
             break;
         case 'C':
             algs = type != 0 ?
@@ -371,7 +371,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'L':
             algs = type != 0 ?
-                ["R'", "F", "R'", "B", "R", "F'", "R'", "B'", "R2"] : ["R2", "B", "R", "F", "R'", "B'", "R", "F'", "R"];
+                ["R2", "B", "R", "F", "R'", "B'", "R", "F'", "R"] : ["R'", "F", "R'", "B", "R", "F'", "R'", "B'", "R2"];
             break;
         case 'M':
             algs = type != 0 ?
