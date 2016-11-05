@@ -480,7 +480,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'r':
             algs = type != 0 ?
-                ["U","R'","U'","R'","L","F","R","F'","R","L'"] : ["R'","F","R'","F'","R","L'","U","R","U'","L"];
+                ["R'","F","R'","F'","R","L'","U","R","U'","L"] : ["U","R'","U'","R'","L","F","R","F'","R","L'"];
             break;
         case 'f':
             algs = type != 0 ?
@@ -488,7 +488,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'l':
             algs = type != 0 ?
-                ["U'","L","U","R'","L","F'","L'","F","R","L'"] : ["R'","F'","L2","F","R","L'","U'","L2","U","L"];
+                ["R'","F'","L2","F","R","L'","U'","L2","U","L"] : ["U'","L","U","R'","L","F'","L'","F","R","L'"];
             break;
         case 'u':
             algs = type != 0 ?

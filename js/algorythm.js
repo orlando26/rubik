@@ -227,7 +227,7 @@ function solucionAristas() {
         aristasMemo.remove(aristasRepetidas[i]);
     }
 
-    if (aristasMemo.length != 0){
+    if ((aristasMemo.length != 0) && ((aristasMemo.length % 2) != 0)){
     aristasMemo.push(z);}
 }
 
