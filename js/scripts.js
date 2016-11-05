@@ -45,18 +45,18 @@ $(function() {
         letrasMemo = letrasMemo.concat(esquinasMemo);
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
-        var algsArray = getAlgsByArray(esquinasMemo);
-        var algsArrayA=getAlgsByArray(aristasMemo);
+        var algsArray = getAlgsByArray(letrasMemo);
+        //var algsArrayA=getAlgsByArray(aristasMemo);
         console.log('Algoritmos : ' + algsArray);
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
         }
-        if (algsArrayA.length != 0) {
+        /*if (algsArrayA.length != 0) {
             var movsArr = makeMovementsArray(algsArrayA);
             cube._solve(movsArr);
-        }
+        }*/
     });
 
     $('#statebtn').click(function() {
