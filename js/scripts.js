@@ -46,20 +46,13 @@ $(function() {
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
 
-        var algsArray = getAlgsByArray(esquinasMemo);
-        var algsArrayA=getAlgsByArray(aristasMemo);
-
-        totalAlgs=algsArray.concat(algsArrayA);
-
-        console.log('Algoritmos : ' + totalAlgs);
+        var algsArray = getAlgsByArray(letrasMemo);
+        //var algsArrayA=getAlgsByArray(aristasMemo);
+        console.log('Algoritmos : ' + algsArray);
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
-        }
-        if (algsArrayA.length != 0) {
-            var movsArrA = makeMovementsArray(algsArrayA);
-            cube._solve(movsArrA);
         }
 
     });
@@ -531,7 +524,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'z':
             algs = type != 0 ?
-                ["U", "R", "U2", "L", "F", "R'", "F'", "L'", "U", "F", "R", "F'", "U", "R'"] : [];
+                [] : ["U", "R", "U2", "L", "F", "R'", "F'", "L'", "U", "F", "R", "F'", "U", "R'"];
             break;
     }
     return algs;
