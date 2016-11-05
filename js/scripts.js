@@ -7,7 +7,7 @@ var white = "rgb(255, 255, 255)";
 var orange = "rgb(255, 165, 0)";
 var cube;
 var colorPicker;
-var a = 'a', A = 'A', b = 'b', B = 'B', c = 'c', C = 'C', d = 'd', D = 'D', e = 'e', E = 'E', f = 'f', F = 'F', g = 'g', G = 'G', h = 'h', H = 'H', i = 'i', I = 'I', j = 'j', J = 'J', k = 'k', K = 'K', l = 'l', L = 'L', m = 'm', M = 'M', n = 'n', N = 'N', o = 'o', O = 'O', p = 'p', P = 'P', q = 'q', Q = 'Q', r = 'r', R = 'R', s = 's', S = 'S', t = 't', T = 'T', u = 'u', U = 'U', v = 'v', V = 'V', w = 'w', W = 'W', x = 'x', X = 'X';
+var a = 'a', A = 'A', b = 'b', B = 'B', c = 'c', C = 'C', d = 'd', D = 'D', e = 'e', E = 'E', f = 'f', F = 'F', g = 'g', G = 'G', h = 'h', H = 'H', i = 'i', I = 'I', j = 'j', J = 'J', k = 'k', K = 'K', l = 'l', L = 'L', m = 'm', M = 'M', n = 'n', N = 'N', o = 'o', O = 'O', p = 'p', P = 'P', q = 'q', Q = 'Q', r = 'r', R = 'R', s = 's', S = 'S', t = 't', T = 'T', u = 'u', U = 'U', v = 'v', V = 'V', w = 'w', W = 'W', x = 'x', X = 'X', z='z';
 var s0 = M, s1 = p, s2 = P, s3 = m, s4 = 'CF', s5 = o, s6 = N, s7 = n, s8 = O;
 var face = 'front';
 var esquinasMemo = true;
@@ -45,18 +45,23 @@ $(function() {
         letrasMemo = letrasMemo.concat(esquinasMemo);
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
+
         var algsArray = getAlgsByArray(esquinasMemo);
         var algsArrayA=getAlgsByArray(aristasMemo);
-        console.log('Algoritmos : ' + algsArray);
+
+        totalAlgs=algsArray.concat(algsArrayA);
+
+        console.log('Algoritmos : ' + totalAlgs);
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
         }
         if (algsArrayA.length != 0) {
-            var movsArr = makeMovementsArray(algsArrayA);
-            cube._solve(movsArr);
+            var movsArrA = makeMovementsArray(algsArrayA);
+            cube._solve(movsArrA);
         }
+
     });
 
     $('#statebtn').click(function() {
@@ -448,7 +453,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'i':
             algs = type != 0 ?
-                ["R'","F'","U'","F","R","B","L","U","L'","B"] :
+                ["R'","F'","U'","F","R","B","L","U","L'","B'"] :
                 ["R","L'","U'","L","U","R'","L","F'","L'","F"];
             break;
         case 'c':
@@ -523,6 +528,10 @@ function getAlgsByLetter(letter, type) {
         case 'g':
             algs = type != 0 ?
                 ["U","F'","B","L'","B2","L","F","B'","U'","B2"] : ["B2","U","F'","B","L'","B2","L","F","B'","U'"];
+            break;
+        case 'z':
+            algs = type != 0 ?
+                ["U", "R", "U2", "L", "F", "R'", "F'", "L'", "U", "F", "R", "F'", "U", "R'"] : [];
             break;
     }
     return algs;
