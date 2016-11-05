@@ -1,3 +1,4 @@
+/**file:///home/orlando/Documents/git_proyects/rubik/index.html */
 var yellow = "rgb(255, 255, 0)";
 var red = "rgb(255, 0, 0)";
 var green = "rgb(0, 255, 0)";
@@ -46,7 +47,6 @@ $(function() {
         console.log('Letras memorizadas: ' + letrasMemo);
         var algsArray = getAlgsByArray(esquinasMemo);
         console.log('Algoritmos : ' + algsArray);
-        var simpleNotationMovs = ["R'", "D'", "R", "D"];
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
@@ -139,7 +139,7 @@ function getMovement(move) {
             movement = { face: "R", slice: "M", rotate: "right" };
             break;
         case "L":
-            movement = { face: "L", slice: "M", rotate: "Right" };
+            movement = { face: "L", slice: "M", rotate: "right" };
             break;
         case "L'":
             movement = { face: "L", slice: "M", rotate: "left" };
@@ -326,8 +326,8 @@ function getAlgsByLetter(letter, type) {
     var algs = [];
     switch (letter) {
         case 'B':
-            algs = type != 0 ?
-                ["R", "B'", "R", "F2", "R'", "B", "R", "F2", "R2"] : ["R2", "F2", "R'", "B'", "R", "F2", "R'", "B", "R'"];
+            algs = type != 0 ? 
+            ["R", "B'", "R", "F2", "R'", "B", "R", "F2", "R2"] : ["R2", "F2", "R'", "B'", "R", "F2", "R'", "B", "R'"];
             break;
         case 'C':
             algs = type != 0 ?
@@ -371,7 +371,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'L':
             algs = type != 0 ?
-                ["R'", "F", "R'", "B", "R", "F'", "R'", "B'", "R2"] : ["R2", "B", "R", "F", "R'", "B'", "R", "F'", "R"];
+                ["R2", "B", "R", "F", "R'", "B'", "R", "F'", "R"] : ["R'", "F", "R'", "B", "R", "F'", "R'", "B'", "R2"];
             break;
         case 'M':
             algs = type != 0 ?

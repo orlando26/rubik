@@ -1,10 +1,10 @@
 var FACES = {
-    front: {M:"yellow", p:"yellow", P:"orange", m:"white", CF:"green", o:"orange", N:"blue", n:"white", O:"orange"},
-    back: {E:"blue", h:"blue", H:"red", e:"yellow", CB:"blue", g:"red", F:"red", f:"orange", G:"orange"},
-    up: {C:"yellow", b:"white", B:"blue", c:"orange", CU:"white", a:"blue", D:"white", d:"green", A:"orange",},
-    down: {U:"green", x:"red", X:"green", u:"blue", CD:"yellow", w:"green", V:"white", v:"red", W:"green",},
-    left: {I:"green", l:"green", L:"white", i:"green", CL:"orange", k:"yellow", J:"red", j:"blue", K:"yellow",},
-    right: {Q:"yellow", t:"orange", T:"blue", q:"yellow", CR:"red", s:"white", R:"red", r:"red", S:"white",}
+    front: { M: "yellow", p: "yellow", P: "orange", m: "white", CF: "green", o: "orange", N: "blue", n: "white", O: "orange" },
+    back: { G: "blue", f: "blue", F: "red", g: "yellow", CB: "blue", e: "red", H: "red", h: "orange", E: "orange" },
+    up: { C: "yellow", b: "white", B: "blue", c: "orange", CU: "white", a: "blue", D: "white", d: "green", A: "orange", },
+    down: { U: "green", x: "red", X: "green", u: "blue", CD: "yellow", w: "green", V: "white", v: "red", W: "green", },
+    left: { I: "green", l: "green", L: "white", i: "green", CL: "orange", k: "yellow", J: "red", j: "blue", K: "yellow", },
+    right: { Q: "yellow", t: "orange", T: "blue", q: "yellow", CR: "red", s: "white", R: "red", r: "red", S: "white", }
 };
 
 YUI.add('rubik-simple', function(Y) {
@@ -166,8 +166,8 @@ YUI.add('rubik-simple', function(Y) {
         _setInitialColors: function() {
             for (var face in INIT_CONFIG) {
                 var faceArr = [];
-                for(var key in FACES[face]){
-                    faceArr.push(FACES[face][key]);    
+                for (var key in FACES[face]) {
+                    faceArr.push(FACES[face][key]);
                 }
                 Y.one('.' + INIT_CONFIG[face][0] + '.' + face + ' > div').addClass(faceArr[0]);
                 Y.one('.' + INIT_CONFIG[face][1] + '.' + face + ' > div').addClass(faceArr[1]);
@@ -314,13 +314,8 @@ YUI.add('rubik-simple', function(Y) {
 
                 default: break;
             }
-
-            if (movement.face == "U") cubeMove = movement.rotate == "left" ? "U" : "U'";
-            if (movement.face == "D") cubeMove = movement.rotate == "left" ? "D'" : "D";
-            if (movement.face == "R") cubeMove = movement.rotate == "left" ? "R" : "R'";
-            if (movement.face == "L") cubeMove = movement.rotate == "left" ? "L'" : "L";
-            if (movement.face == "B") cubeMove = movement.rotate == "left" ? "B" : "B'";
-            if (movement.face == "F") cubeMove = movement.rotate == "left" ? "F'" : "F";
+            
+            cubeMove = getMovementOriginalNotation(movement);
 
             if (movement && movement.face != "C") {
                 this._doMovement(movement);
@@ -354,13 +349,20 @@ YUI.add('rubik-simple', function(Y) {
             this._solving = Y.later(350, this, function() {
                 this._expectingTransition = true;
                 this._doMovement(moves[i]);
-                if (i == moves.length - 1) this._solving.cancel();
+                console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
+                if (i == moves.length - 1) {
+                    this._solving.cancel();
+                    console.log('Solving finished');
+                }
                 i++;
             }, null, true);
         },
 
         _doMovement: function(m, fromQueue) {
-            if (this._moving) return;//we cancel if there is some movement going on
+            if (this._moving) {
+                console.log('Se cancelo D:');
+                return;//we cancel if there is some movement going on
+            }
             var plane = this._plane,
                 list = Y.all('.' + m.face + m.slice);
             this._movement = m;
@@ -413,3 +415,14 @@ YUI.add('rubik-simple', function(Y) {
 }, "0.0.1", {
         requires: ['yui-later', 'node', 'transition', 'event', 'event-delegate', 'event-gestures']
     });
+
+function getMovementOriginalNotation(movement) {
+    var cubeMove;
+    if (movement.face == "U") cubeMove = movement.rotate == "left" ? "U" : "U'";
+    if (movement.face == "D") cubeMove = movement.rotate == "left" ? "D'" : "D";
+    if (movement.face == "R") cubeMove = movement.rotate == "left" ? "R" : "R'";
+    if (movement.face == "L") cubeMove = movement.rotate == "left" ? "L'" : "L";
+    if (movement.face == "B") cubeMove = movement.rotate == "left" ? "B" : "B'";
+    if (movement.face == "F") cubeMove = movement.rotate == "left" ? "F'" : "F";
+    return cubeMove;
+}
