@@ -368,7 +368,7 @@ YUI.add('rubik-simple', function(Y) {
             this._movement = m;
             this._moving = true;
             this._attachToPlane(list);
-            plane.addClass('moving').addClass(m.slice + '-' + m.rotate);
+            plane.addClass('moving').addClass(m.slice + '-' + m.rotate);    
         },
         _attachToPlane: function(list) {
             this._plane.setContent(list);

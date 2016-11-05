@@ -23,6 +23,7 @@ $(function() {
 
 /**Funcion para solucionar esquinas */
 function solucionEsquinas() {
+    var pAristas = false;
     var pieza = A;
     var buf1 = "white"; //El color del buffer siempre sera blanco
     var buf2 = "green"; //El color de la pareja1 del buffer siempre sera verde
@@ -129,10 +130,13 @@ function solucionEsquinas() {
         esquinasMemo.remove(esquinasRepetidas[i]);
         esquinasMemo.remove(esquinasRepetidas[i]);
     }
+
+    pAristas = true;
 }
 
 /**funcion para solucionar aristas */
 function solucionAristas() {
+    pAristas = true;
     var pieza = a;
     var buf1 = "white"; //El color del buffer siempre sera blanco
     var buf2 = "green"; //El color de la pareja1 del buffer siempre sera verde
