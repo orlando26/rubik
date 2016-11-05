@@ -46,10 +46,15 @@ $(function() {
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
         var algsArray = getAlgsByArray(esquinasMemo);
+        var algsArrayA=getAlgsByArray(aristasMemo);
         console.log('Algoritmos : ' + algsArray);
 
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
+            cube._solve(movsArr);
+        }
+        if (algsArrayA.length != 0) {
+            var movsArr = makeMovementsArray(algsArrayA);
             cube._solve(movsArr);
         }
     });
@@ -425,6 +430,99 @@ function getAlgsByLetter(letter, type) {
             algs = type != 0 ?
                 ["R'", "F'", "R", "B2", "R'", "F", "R", "B2"] :
                 ["B2", "R'", "F'", "R", "B2", "R'", "F", "R"];
+            break;
+        case 'd':
+            algs = type != 0 ?
+                ["R'","U'","R","U","R","L'","B'","R'","B","L"] :
+                ["L'","B'","U'","B","L","F","R","U","R'","F'"];
+            break;
+        case 'q':
+            algs = type != 0 ?
+                ["F","U","F'","L'","B'","R'","U'","R","B","L"] :
+                ["R","U","R'","U'","R'","L","F","R","F'","L'"];
+            break;
+        case 'b':
+            algs = type != 0 ?
+                ["R'","F'","L'","U","L","F","R","B","U'","B'"] :
+                ["R","B","U","B'","R'","F'","L'","U'","L","F"];
+            break;
+        case 'i':
+            algs = type != 0 ?
+                ["R'","F'","U'","F","R","B","L","U","L'","B"] :
+                ["R","L'","U'","L","U","R'","L","F'","L'","F"];
+            break;
+        case 'c':
+            algs = type != 0 ?
+                ["U","F","B'","R'","U","F'","R","U'","F'","B","L","U'","F","L'"] :
+                ["U","F","B'","R'","U","F'","R","U'","F'","B","L","U'","F","L'"];
+            break;
+        case 'e':
+            algs = type != 0 ?
+                [] : [];
+            break;
+        case 'n':
+            algs = type != 0 ?
+                ["U'","R","U","R","L'","B'","R'","B","R'","L"] : ["R","L'","B'","R","B","R'","L","U'","R'","U"];
+            break;
+        case 't':
+            algs = type != 0 ?
+                ["R'","F","R","F'","R","L'","U","R'","U'","L"] : ["U","R","U'","R'","L","F","R'","F'","R","L'"];
+            break;
+        case 'p':
+            algs = type != 0 ?
+                ["U","L'","U'","R","L'","B","L","B'","R'","L"] : ["R","L'","B","L'","B'","R'","L","U","L","U'"];
+            break;
+        case 'j':
+            algs = type != 0 ?
+                ["R'","L","F'","L'","F","R","L'","U'","L","U"] : ["U","F","B'","R'","F","R","F'","B","U'","F'"];
+            break;
+        case 'h':
+            algs = type != 0 ?
+                ["U","F'","B","L'","B","L","F","B'","U'","B'"] : ["R","L'","B'","R'","B","R'","L","U'","R","U"];
+            break;
+        case 'r':
+            algs = type != 0 ?
+                ["U","R'","U'","R'","L","F","R","F'","R","L'"] : ["R'","F","R'","F'","R","L'","U","R","U'","L"];
+            break;
+        case 'f':
+            algs = type != 0 ?
+                ["U","F'","B","L'","B'","L","F","B'","U'","B"] : ["R","L'","B","L","B'","R'","L","U","L'","U'"];
+            break;
+        case 'l':
+            algs = type != 0 ?
+                ["U'","L","U","R'","L","F'","L'","F","R","L'"] : ["R'","F'","L2","F","R","L'","U'","L2","U","L"];
+            break;
+        case 'u':
+            algs = type != 0 ?
+                ["F2","U","F","B'","R'","F2","R","F'","B","U'"] : ["U","F","B'","R'","F2","R","F'","B","U'","F2"];
+            break;
+        case 'o':
+            algs = type != 0 ?
+                ["U","F'","B","L","F2","L'","F","B'","U","F2","U2"] : ["U2","F2","U","F","B'","R'","F2","R","F'","B","U"];
+            break;
+        case 'v':
+            algs = type != 0 ?
+                ["U'","R2","U","R","L'","B'","R2","B","R'","L"] : ["R","L'","B'","R2","B","R'","L","U'","R2","U"];
+            break;
+        case 's':
+            algs = type != 0 ?
+                ["R'","F","R2","F'","R","L'","U","R2","U'","L"] : ["U","R2","U'","R'","L","F","R2","F'","R","L'"];
+            break;
+        case 'x':
+            algs = type != 0 ?
+                ["U","L2","U'","R","L'","B","L2","B'","R'","L"] : ["R","L'","B","L2","B'","R'","L","U","L2","U'"];
+            break;
+        case 'k':
+            algs = type != 0 ?
+                ["R'","F'","L'","F","R","L'","U'","L","U","L"] : ["U'","L2","U","R'","L","F'","L2","F","R","L'"];
+            break;
+        case 'w':
+            algs = type != 0 ?
+                ["U2","B2","U","F'","B","L'","B2","L","F","B'","U"] : ["U","F","B'","R","B2","R'","F'","B","U","B2","U2"];
+            break;
+        case 'g':
+            algs = type != 0 ?
+                ["U","F'","B","L'","B2","L","F","B'","U'","B2"] : ["B2","U","F'","B","L'","B2","L","F","B'","U'"];
             break;
     }
     return algs;

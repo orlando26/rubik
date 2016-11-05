@@ -346,7 +346,7 @@ YUI.add('rubik-simple', function(Y) {
         _solve: function(moves) {
             console.log('attemp to solve');
             var i = 0;
-            this._solving = Y.later(350, this, function() {
+            this._solving = Y.later(400, this, function() {
                 this._expectingTransition = true;
                 this._doMovement(moves[i]);
                 console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
@@ -369,6 +369,7 @@ YUI.add('rubik-simple', function(Y) {
             this._moving = true;
             this._attachToPlane(list);
             plane.addClass('moving').addClass(m.slice + '-' + m.rotate);
+            
         },
         _attachToPlane: function(list) {
             this._plane.setContent(list);
