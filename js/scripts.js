@@ -43,6 +43,9 @@ $(function() {
         solucionAristas();
         var letrasMemo = [];
         letrasMemo = letrasMemo.concat(esquinasMemo);
+        if ((esquinasMemo.length % 2) != 0){
+            letrasMemo = letrasMemo.concat("a");
+        }
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
 
@@ -429,6 +432,11 @@ function getAlgsByLetter(letter, type) {
                 ["R'", "F'", "R", "B2", "R'", "F", "R", "B2"] :
                 ["B2", "R'", "F'", "R", "B2", "R'", "F", "R"];
             break;
+        case 'a':
+            algs = type != 0 ?
+                [] :
+                [];
+            break;
         case 'd':
             algs = type != 0 ?
                 ["R'","U'","R","U","R","L'","B'","R'","B","L"] :
@@ -524,7 +532,7 @@ function getAlgsByLetter(letter, type) {
             break;
         case 'z':
             algs = type != 0 ?
-                [] : ["U", "R", "U2", "L", "F", "R'", "F'", "L'", "U", "F", "R", "F'", "U", "R'"];
+                ["U", "R", "U2", "L", "F", "R'", "F'", "L'", "U", "F", "R", "F'", "U", "R'"] : [];
             break;
     }
     return algs;
