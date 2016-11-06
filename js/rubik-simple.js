@@ -314,7 +314,7 @@ YUI.add('rubik-simple', function(Y) {
 
                 default: break;
             }
-            
+
             cubeMove = getMovementOriginalNotation(movement);
 
             if (movement && movement.face != "C") {
@@ -345,6 +345,7 @@ YUI.add('rubik-simple', function(Y) {
 
         _solve: function(moves) {
             console.log('attemp to solve');
+            var startTime = new Date();
             var i = 0;
             this._solving = Y.later(330, this, function() {
                 this._expectingTransition = true;
@@ -353,6 +354,16 @@ YUI.add('rubik-simple', function(Y) {
                 if (i == moves.length - 1) {
                     this._solving.cancel();
                     console.log('Solving finished');
+                    var endTime = new Date();
+                    var timeDiff = endTime - startTime;
+                    timeDiff /= 1000;
+                    var seconds = Math.round(timeDiff % 60);
+                    var secondsStr = seconds < 10 ? '0' + seconds.toString() : seconds.toString();
+                    timeDiff = Math.floor(timeDiff / 60);
+                    var minutes = Math.round(timeDiff % 60);
+                    var minutesStr = minutes < 10 ? '0' + minutes.toString() : minutes.toString();
+                    var timeElapsed = minutesStr + ':' + secondsStr;
+                    console.log('Tiempo: ' + timeElapsed);
                 }
                 i++;
             }, null, true);
@@ -368,7 +379,7 @@ YUI.add('rubik-simple', function(Y) {
             this._movement = m;
             this._moving = true;
             this._attachToPlane(list);
-            plane.addClass('moving').addClass(m.slice + '-' + m.rotate);    
+            plane.addClass('moving').addClass(m.slice + '-' + m.rotate);
         },
         _attachToPlane: function(list) {
             this._plane.setContent(list);
