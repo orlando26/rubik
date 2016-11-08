@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Cubbot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,41 +37,33 @@
         <div class="header" data-role="header" style="overflow:hidden;">
             <h1>Cubbot</h1>
             <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
-            <div data-role="navbar" data-iconpos="right">
-                <ul>
-                    <li><a class="navbar" href="#" data-icon="grid">Summary</a></li>
-                    <li><a class="navbar" href="#" data-icon="star">Favs</a></li>
-                    <li><a class="navbar" href="#" data-icon="gear">Setup</a></li>
-                </ul>
-            </div>
-            <!-- /navbar -->
+            
         </div>
-        <!-- /header -->
         <!-- /header -->
 
         <div role="main" class="ui-content content">
             <div style="margin-top:1vh" class="container">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
 
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
                         <ul class="pagination text-center">
                             <li><a style="width:15%" href="javascript:void(0)">«</a></li>
                             <li class="active"><a style="width:70%" id="face-name" href="javascript:void(0)">Front Face</a></li>
                             <li><a style="width:15%" id="statebtn" href="javascript:void(0)">»</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
                         
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-xs-3">
                         <div id="left-face"></div>
                     </div>
-                    <div style="height: 50vh" class="col-sm-6">
+                    <div style="height: 50vh" class="col-xs-6">
                         <div id="face">
                             <div id="s0" class="square"></div>
                             <div id="s3" class="square"></div>
@@ -85,40 +78,40 @@
                             <div id="s8" class="square"></div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-xs-3">
                         <div id="right-face"></div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-blue" class="color-picker" style="background:blue;"></button>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-orange" class="color-picker" style="background:orange;"></button>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-red" class="color-picker" style="background:red;"></button>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-white" class="color-picker" style="background:white;"></button>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-yellow" class="color-picker" style="background:yellow;"></button>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
                         <button id="color-picker-green" class="color-picker" style="background:rgb(0,255,0);"></button>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
 
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
                         <a id="save-state-btn" style="width:100%;" class="btn btn-raised btn-danger">Save state</a>
                         <a id="rubik-link" style="width:100%;" data-transition="flip" href="#rubik-page" class="btn btn-raised btn-success">See Cube</a>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-xs-4">
 
                     </div>
                 </div>
