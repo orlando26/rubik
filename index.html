@@ -9,13 +9,23 @@
     <link rel="stylesheet" href="css/rubik.css"></link>
     <link rel="stylesheet" href="css/styles.css"></link>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.min.css"
+    />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/tether/1.3.1/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
     <script src="js/rubik-simple.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/algorythm.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.iife.min.js"></script>
+
+
 
 
 </head>
@@ -23,40 +33,97 @@
 <body>
     <div data-role="page" id="main">
 
-        <div data-role="header" class="header">
+        <div class="header" data-role="header" style="overflow:hidden;">
             <h1>Cubbot</h1>
-
+            <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+            <div data-role="navbar" data-iconpos="right">
+                <ul>
+                    <li><a class="navbar" href="#" data-icon="grid">Summary</a></li>
+                    <li><a class="navbar" href="#" data-icon="star">Favs</a></li>
+                    <li><a class="navbar" href="#" data-icon="gear">Setup</a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
         </div>
+        <!-- /header -->
         <!-- /header -->
 
         <div role="main" class="ui-content content">
-            <h3 style="text-align:center;margin-top:5px" id="face-name">Front Face</h3>
-            <div id="face">
-                <div id="s0" class="square"></div>
-                <div id="s3" class="square"></div>
-                <div id="s6" class="square"></div>
+            <div style="margin-top:1vh" class="container">
+                <div class="row">
+                    <div class="col-sm-4">
 
-                <div id="s1" class="square"></div>
-                <div id="s4" class="square center"></div>
-                <div id="s7" class="square"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="pagination text-center">
+                            <li><a style="width:15%" href="javascript:void(0)">«</a></li>
+                            <li class="active"><a style="width:70%" id="face-name" href="javascript:void(0)">Front Face</a></li>
+                            <li><a style="width:15%" id="statebtn" href="javascript:void(0)">»</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        
+                    </div>
+                </div>
 
-                <div id="s2" class="square"></div>
-                <div id="s5" class="square"></div>
-                <div id="s8" class="square"></div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div id="left-face"></div>
+                    </div>
+                    <div style="height: 50vh" class="col-sm-6">
+                        <div id="face">
+                            <div id="s0" class="square"></div>
+                            <div id="s3" class="square"></div>
+                            <div id="s6" class="square"></div>
+
+                            <div id="s1" class="square"></div>
+                            <div id="s4" class="square center"></div>
+                            <div id="s7" class="square"></div>
+
+                            <div id="s2" class="square"></div>
+                            <div id="s5" class="square"></div>
+                            <div id="s8" class="square"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div id="right-face"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button id="color-picker-blue" class="color-picker" style="background:blue;"></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="color-picker-orange" class="color-picker" style="background:orange;"></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="color-picker-red" class="color-picker" style="background:red;"></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="color-picker-white" class="color-picker" style="background:white;"></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="color-picker-yellow" class="color-picker" style="background:yellow;"></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="color-picker-green" class="color-picker" style="background:rgb(0,255,0);"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a id="save-state-btn" style="width:100%;" class="btn btn-raised btn-danger">Save state</a>
+                        <a id="rubik-link" style="width:100%;" data-transition="flip" href="#rubik-page" class="btn btn-raised btn-success">See Cube</a>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
 
             </div>
-
-            <div id="color-pickers-tab">
-                <button id="color-picker-blue" class="color-picker" style="background:blue;"></button>
-                <button id="color-picker-orange" class="color-picker" style="background:orange;"></button>
-                <button id="color-picker-red" class="color-picker" style="background:red;"></button>
-                <button id="color-picker-white" class="color-picker" style="background:white;"></button>
-                <button id="color-picker-yellow" class="color-picker" style="background:yellow;"></button>
-                <button id="color-picker-green" class="color-picker" style="background:rgb(0,255,0);"></button>
-            </div>
-            <button id="statebtn">next face</button>
-            <a id="rubik-link" href="#rubik-page" onclick="$('#rubik').show();"><h1 style="text-align:center">see rubik</h1></a>
-
         </div>
         <!-- /content -->
 
@@ -277,7 +344,7 @@
                 </div>
 
             </section>
-            <button id="girarTest" style="width:300px;float:right;">test</button>
+            <button id="girarTest" style="width:300px;float:right;">Solve</button>
         </div>
         <div class="footer" data-role="footer">
             <h1>By Lucero, Meli y Orlando</h1>

@@ -14,7 +14,9 @@ var esquinasMemo = true;
 var aristasMemo = false;
 $(function() {
     //init();
-
+    
+        $('#rubik-link').hide();
+        $('#save-state-btn').attr("disabled", true);
 
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
@@ -59,6 +61,25 @@ $(function() {
         }
 
     });
+    
+    $('#save-state-btn').click(function(){
+        FACES[face][s0] = getColor($('#s0').css('background-color').toString());
+        FACES[face][s1] = getColor($('#s1').css('background-color').toString());
+        FACES[face][s2] = getColor($('#s2').css('background-color').toString());
+        FACES[face][s3] = getColor($('#s3').css('background-color').toString());
+        FACES[face][s4] = getColor($('#s4').css('background-color').toString());
+        FACES[face][s5] = getColor($('#s5').css('background-color').toString());
+        FACES[face][s6] = getColor($('#s6').css('background-color').toString());
+        FACES[face][s7] = getColor($('#s7').css('background-color').toString());
+        FACES[face][s8] = getColor($('#s8').css('background-color').toString());
+        YUI().use('node', 'rubik-simple', function(Y) {
+                cube = window.cube = new Y.Rubik();
+                cube.run();
+            });
+        $(this).hide('clip');
+        $('#rubik-link').show('clip');
+        
+    });
 
     $('#statebtn').click(function() {
         if (typeof Android != "undefined") {
@@ -78,35 +99,42 @@ $(function() {
             face = 'right';
             $('#face-name').text("Right Face")
             $('.square').css('background-color', red);
+            $('#left-face').css('background-color', green);
+            $('#right-face').css('background-color', blue);
             s0 = Q; s1 = t; s2 = T; s3 = q; s4 = 'CR'; s5 = s; s6 = R; s7 = r; s8 = S;
         } else if (face == 'right') {
             face = 'left';
             $('#face-name').text("Left Face")
             $('.square').css('background-color', orange);
+            $('#left-face').css('background-color', blue);
+            $('#right-face').css('background-color', green);
             s0 = I; s1 = l; s2 = L; s3 = i; s4 = 'CL'; s5 = k; s6 = J; s7 = j; s8 = K;
         } else if (face == 'left') {
             face = 'up';
             $('#face-name').text("Up Face")
             $('.square').css('background-color', white);
+            $('#left-face').css('background-color', orange);
+            $('#right-face').css('background-color', red);
             s0 = C; s1 = b; s2 = B; s3 = c; s4 = 'CU'; s5 = a; s6 = D; s7 = d; s8 = A;
         } else if (face == 'up') {
             face = 'down';
             $('#face-name').text("Bottom Face")
             $('.square').css('background-color', yellow);
+            $('#left-face').css('background-color', orange);
+            $('#right-face').css('background-color', red);
             s0 = U; s1 = x; s2 = X; s3 = u; s4 = 'CD'; s5 = w; s6 = V; s7 = v; s8 = W;
         } else if (face == 'down') {
             face = 'back';
-            $('#face-name').text("Back Face")
-            $(this).text('save state');
+            $('#face-name').text("Back Face");
             $('.square').css('background-color', blue);
+            $('#left-face').css('background-color', red);
+            $('#right-face').css('background-color', orange);
+            $('#save-state-btn').attr('disabled', false);
             s0 = E; s1 = h; s2 = H; s3 = e; s4 = 'CB'; s5 = g; s6 = F; s7 = f; s8 = G;
         } else if (face == 'back') {
-            $('#rubik-link').show();
+            
             face = '';
-            YUI().use('node', 'rubik-simple', function(Y) {
-                cube = window.cube = new Y.Rubik();
-                cube.run();
-            });
+            
 
         }
     });
