@@ -319,6 +319,7 @@ YUI.add('rubik-simple', function(Y) {
 
             if (movement && movement.face != "C") {
                 this._doMovement(movement);
+                $('#movement-lbl').text(cubeMove);
                 console.log(cubeMove);
             }
 
@@ -372,6 +373,7 @@ YUI.add('rubik-simple', function(Y) {
                     this._solving.cancel();
                     console.log('Solving finished');
                     $('#solve-progress-bar').css('width','100%');
+                    $('#details-btn').show('clip');
                     console.log('Tiempo: ' + timeElapsed);
                 }
                 i++;

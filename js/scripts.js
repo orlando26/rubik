@@ -12,12 +12,16 @@ var s0 = M, s1 = p, s2 = P, s3 = m, s4 = 'CF', s5 = o, s6 = N, s7 = n, s8 = O;
 var face = 'front';
 var esquinasMemo = true;
 var aristasMemo = false;
+var algsString = "";
 $(function() {
     //init();
 
     $('#rubik-link').hide();
     $('#save-state-btn').attr("disabled", true);
     $('#prevBtn').attr('disabled', true);
+    $('#details-btn').click(function(){
+        $('#myModal').modal();    
+    });
 
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
@@ -51,11 +55,11 @@ $(function() {
         }
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
-
+        $('#memo-lbl').text(letrasMemo);
         var algsArray = getAlgsByArray(letrasMemo);
         //var algsArrayA=getAlgsByArray(aristasMemo);
         console.log('Algoritmos : ' + algsArray);
-
+        $('#algorythms-lbl').text(algsString);
         if (algsArray.length != 0) {
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
@@ -405,6 +409,7 @@ function randomInt(min, max) {
 function getAlgsByArray(arr) {
     var algs = [];
     for (var i in arr) {
+        algsString += getAlgsByLetter(arr[i], i % 2) + " - ";
         algs = algs.concat(getAlgsByLetter(arr[i], i % 2));
     }
     return algs;

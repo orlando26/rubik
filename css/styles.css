@@ -125,3 +125,12 @@
 .value{
     margin-left: 2px;
 }
+
+.btn-transparent{
+    background-color:transparent !important;    
+}
+
+.btn-transparent:hover{
+    background-color: hsla(0,0%,60%,.2) !important;
+    border-color: hsla(0,0%,60%,.2) !important;
+}

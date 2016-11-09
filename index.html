@@ -129,9 +129,15 @@
 
     <div id="rubik-page" data-role="page">
         <div class="header" data-role="header">
-            <h1>Cubbot</h1></div>
+            <h1>Cubbot</h1>
+            <a style=" background-color: #3f51b5;color: white;text-shadow: 0 1px 0 #059;border: none;" onclick="window.history.back();" data-icon="arrow-l" class="ui-btn-left">Atras</a>
+
+        </div>
         <div role="main" class="ui-content content">
-            <section id="rubik">
+           
+            <div class="row">
+                    <div class="col-xs-6">
+                         <section id="rubik">
                 <div id="cube-container">
                     <div id="cube-viewport">
                         <div id="cube">
@@ -338,9 +344,6 @@
                 </div>
 
             </section>
-            <div class="row">
-                    <div class="col-xs-6">
-                        
                     </div>
                     <div class="col-xs-6">
                         <div class="jumbotron">
@@ -359,17 +362,39 @@
                             <div class="progress progress-striped active">
                                 <div id="solve-progress-bar" class="progress-bar" style="width: 0%"></div>
                             </div>
-                            
+                            <button type="button" style="display:none;" class="btn btn-primary btn-transparent" id="details-btn">Detalles</button>
+                            <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <a href="javascript:void(0)" data-dismiss="modal" class="close btn btn-danger">x</a>
+                                        <h4 class="modal-title">Detalles</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Letras memorizadas:
+                                        <p id="memo-lbl">Some text in the modal.</p>
+                                        Algoritmos:
+                                        <p id="algorythms-lbl">muchos algoritmos :3
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="javascript:void(0)" data-dismiss="modal" class="btn btn-raised btn-danger">Close</a>
+                                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            
         </div>
         <div class="footer" data-role="footer">
             <h1>By Lucero, Meli y Orlando</h1>
         </div>
     </div>
-
+    
 
 
 </body>
