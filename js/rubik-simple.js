@@ -345,16 +345,15 @@ YUI.add('rubik-simple', function(Y) {
 
         _solve: function(moves) {
             console.log('attemp to solve');
+            var totalMoves = moves.length;
+            var increment = 100 / totalMoves;
             var startTime = new Date();
+            var progress = 0;
             var i = 0;
             this._solving = Y.later(330, this, function() {
                 this._expectingTransition = true;
                 this._doMovement(moves[i]);
-                console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
-                if (i == moves.length - 1) {
-                    this._solving.cancel();
-                    console.log('Solving finished');
-                    var endTime = new Date();
+                var endTime = new Date();
                     var timeDiff = endTime - startTime;
                     timeDiff /= 1000;
                     var seconds = Math.round(timeDiff % 60);
@@ -363,6 +362,16 @@ YUI.add('rubik-simple', function(Y) {
                     var minutes = Math.round(timeDiff % 60);
                     var minutesStr = minutes < 10 ? '0' + minutes.toString() : minutes.toString();
                     var timeElapsed = minutesStr + ':' + secondsStr;
+                    $('#time-lbl').text(timeElapsed);
+                    $('#movement-lbl').text(getMovementOriginalNotation(moves[i]));
+                    progress = increment * i+1;
+                    progress = progress.toString();
+                    $('#solve-progress-bar').css('width', progress+'%');
+                console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
+                if (i == moves.length - 1) {
+                    this._solving.cancel();
+                    console.log('Solving finished');
+                    $('#solve-progress-bar').css('width','100%');
                     console.log('Tiempo: ' + timeElapsed);
                 }
                 i++;

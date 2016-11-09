@@ -14,6 +14,7 @@
     crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.min.css"
     />
+
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -36,26 +37,26 @@
 
         <div class="header" data-role="header" style="overflow:hidden;">
             <h1>Cubbot</h1>
-            <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
-            
+            <a style=" background-color: #3f51b5;color: white;text-shadow: 0 1px 0 #059;border: none;" href="#" data-icon="grid" class="ui-btn-right">Options</a>
+
         </div>
         <!-- /header -->
 
         <div role="main" class="ui-content content">
             <div style="margin-top:1vh" class="container">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
 
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-6">
                         <ul class="pagination text-center">
-                            <li><a style="width:15%" href="javascript:void(0)">«</a></li>
+                            <li><a id="prevBtn" style="width:15%" data-icon="grid" href="javascript:void(0)">&lt&lt</a></li>
                             <li class="active"><a style="width:70%" id="face-name" href="javascript:void(0)">Front Face</a></li>
-                            <li><a style="width:15%" id="statebtn" href="javascript:void(0)">»</a></li>
+                            <li><a style="width:15%" id="statebtn" href="javascript:void(0)">&gt&gt</a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-4">
-                        
+                    <div class="col-xs-3">
+
                     </div>
                 </div>
 
@@ -88,10 +89,10 @@
                         <button id="color-picker-blue" class="color-picker" style="background:blue;"></button>
                     </div>
                     <div class="col-xs-2">
-                        <button id="color-picker-orange" class="color-picker" style="background:orange;"></button>
+                        <button id="color-picker-orange" class="color-picker" style="background:rgb(255, 127, 0);"></button>
                     </div>
                     <div class="col-xs-2">
-                        <button id="color-picker-red" class="color-picker" style="background:red;"></button>
+                        <button id="color-picker-red" class="color-picker" style="background:rgb(225, 0, 0)";"></button>
                     </div>
                     <div class="col-xs-2">
                         <button id="color-picker-white" class="color-picker" style="background:white;"></button>
@@ -100,7 +101,7 @@
                         <button id="color-picker-yellow" class="color-picker" style="background:yellow;"></button>
                     </div>
                     <div class="col-xs-2">
-                        <button id="color-picker-green" class="color-picker" style="background:rgb(0,255,0);"></button>
+                        <button id="color-picker-green" class="color-picker" style="background:rgb(5, 140, 7);"></button>
                     </div>
                 </div>
                 <div class="row">
@@ -337,7 +338,32 @@
                 </div>
 
             </section>
-            <button id="girarTest" style="width:300px;float:right;">Solve</button>
+            <div class="row">
+                    <div class="col-xs-6">
+                        
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="jumbotron">
+                            <button class="btn btn-raised btn-success" id="girarTest">Resolver</button>
+                            <h3>Datos:</h3>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    Tiempo:
+                                </div>
+                                <div class="col-xs-3">
+                                    <p id="time-lbl">00:00</p>
+                                </div>
+                                <div class="col-xs-3">Movimiento:</div>
+                                <div class="col-xs-3"><p id="movement-lbl"></p></div>
+                            </div>
+                            <div class="progress progress-striped active">
+                                <div id="solve-progress-bar" class="progress-bar" style="width: 0%"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            
         </div>
         <div class="footer" data-role="footer">
             <h1>By Lucero, Meli y Orlando</h1>

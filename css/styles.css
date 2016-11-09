@@ -2,7 +2,7 @@
     text-shadow: 0 1px 0 #059 !important;
 }
 .header{
-    height: 12vh;
+    height: 10vh;
     margin: 0!important;
     padding: 0!important;
     border: 0 !important;
@@ -15,6 +15,8 @@
     color: white !important;
     text-shadow: 0 1px 0 #059 !important;
     border: none !important;
+    float: right;
+    width: 20vw;
 }
 .navbar:hover{
     background-color: #3F51AD !important;
@@ -35,7 +37,7 @@
 }
 
 .footer{
-    height: 8vh;
+    height: 10vh;
     margin: 0!important;
     padding: 0!important;
     border: 0 !important;
@@ -62,7 +64,7 @@
     height: 32%;
     width: 32%;
     border: solid black 1px;
-    background: rgb(0,255,0);
+    background: rgb(5, 140, 7);
     cursor: pointer;
 }
 
@@ -102,12 +104,24 @@
     float: right;
     height: 100%;
     width:30%;
-    background-color: orange;
+    background-color: rgb(255, 127, 0);
 }
 
 #right-face{
     float: left;
     height: 100%;
     width:30%;
-    background-color: red;
+    background-color: rgb(225, 0, 0);
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.inline-element{
+    float: left;
+}
+
+.value{
+    margin-left: 2px;
 }
