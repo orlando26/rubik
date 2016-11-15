@@ -14,8 +14,7 @@ var esquinasMemo = true;
 var aristasMemo = false;
 var algsString = "";
 $(function() {
-    //init();
-
+    
     $('#rubik-link').hide();
     $('#save-state-btn').attr("disabled", true);
     $('#prevBtn').attr('disabled', true);
@@ -409,7 +408,7 @@ function randomInt(min, max) {
 function getAlgsByArray(arr) {
     var algs = [];
     for (var i in arr) {
-        algsString += getAlgsByLetter(arr[i], i % 2) + " - ";
+        algsString += getAlgsByLetter(arr[i], i % 2) + " ";
         algs = algs.concat(getAlgsByLetter(arr[i], i % 2));
     }
     return algs;
