@@ -79,7 +79,7 @@ $(function() {
         console.log('Algoritmos : ' + algsArray);
         $('#algorythms-lbl').text(algsString);
         if (algsArray.length != 0) {
-            prepareAlgsForArduino(algsArray);
+            sendAlgsToArduino(algsArray);
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
         }
