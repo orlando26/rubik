@@ -15,29 +15,32 @@ var aristasMemo = false;
 var algsString = "";
 var conected = false;
 $(function() {
-    
+
     $('#rubik-link').hide();
-    $('#bt-conected').hide(); 
+    $('#bt-conected').hide();
     $('#save-state-btn').attr("disabled", true);
     $('#prevBtn').attr('disabled', true);
-    $('#details-btn').click(function(){
-        $('#myModal').modal();    
+    $('#details-btn').click(function() {
+        $('#myModal').modal();
     });
-    
-    $('#btn-connect').click(function(){
-       console.log(conected);
-       if(conected){
-           console.log('entro en verdadero');
-           $(this).text('Conectar');
-           $('#bt-disconected').show();
-           $('#bt-conected').hide(); 
-       }else{
-           console.log('entro en falso');
-           $(this).text('Desconectar');
-           $('#bt-conected').show();
-           $('#bt-disconected').hide(); 
-       }
-       conected = !conected;
+
+    $('#btn-connect').click(function() {
+        if (typeof Android != "undefined") {
+            //Android.showToast("hola");
+            if (conected) {
+                Arduino.disconnectArduino();
+                $(this).text('Conectar');
+                $('#bt-disconected').show();
+                $('#bt-conected').hide();
+            } else {
+                Android.connectArduino();
+                $(this).text('Desconectar');
+                $('#bt-conected').show();
+                $('#bt-disconected').hide();
+            }
+            conected = !conected;
+        }
+
     });
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
@@ -157,9 +160,7 @@ $(function() {
     });
 
     $('#statebtn').click(function() {
-        if (typeof Android != "undefined") {
-            //Android.showToast("hola");
-        }
+
         FACES[face][s0] = getColor($('#s0').css('background-color').toString());
         FACES[face][s1] = getColor($('#s1').css('background-color').toString());
         FACES[face][s2] = getColor($('#s2').css('background-color').toString());
