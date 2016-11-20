@@ -13,15 +13,32 @@ var face = 'front';
 var esquinasMemo = true;
 var aristasMemo = false;
 var algsString = "";
+var conected = false;
 $(function() {
     
     $('#rubik-link').hide();
+    $('#bt-conected').hide(); 
     $('#save-state-btn').attr("disabled", true);
     $('#prevBtn').attr('disabled', true);
     $('#details-btn').click(function(){
         $('#myModal').modal();    
     });
-
+    
+    $('#btn-connect').click(function(){
+       console.log(conected);
+       if(conected){
+           console.log('entro en verdadero');
+           $(this).text('Conectar');
+           $('#bt-disconected').show();
+           $('#bt-conected').hide(); 
+       }else{
+           console.log('entro en falso');
+           $(this).text('Desconectar');
+           $('#bt-conected').show();
+           $('#bt-disconected').hide(); 
+       }
+       conected = !conected;
+    });
     $('.square').click(function() {
         if ($(this).attr('id') != 's4') {
 

@@ -29,22 +29,39 @@
 }
 
 .content{
-    height: 80vh;
+    height: 90vh;
     margin: 0!important;
     padding: 0!important;
     border: 0 !important;
     background-color: #eee;
 }
 
-.footer{
-    height: 10vh;
-    margin: 0!important;
-    padding: 0!important;
-    border: 0 !important;
-    background-color: #3f51b5 !important;
-    
-    color: white !important;
+#btn-connect{
+    margin-right: 4vw;
+    margin-top: 2vh;
+    height: 6vh !important;
+    background-image: url("../images/arduino-icon-2.png") !important;
+    background-size: 20% !important;
+    background-repeat: no-repeat !important;
+    padding-left: 3%;   
+    background-position:0 center;
 }
+
+#bt-conected{
+    width: 4.3vh !important;
+    height: 4.3vh !important;
+    background-color: green !important;
+    margin-top: 3vh;
+}
+
+#bt-disconected{
+    width: 4.3vh !important;
+    height: 4.3vh !important;
+    background-color: red !important;
+    margin-top: 3vh;
+    display: false !important;
+}
+
 
 #rubik{
     margin-top:20px;
