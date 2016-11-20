@@ -17,7 +17,10 @@ $(function() {
         letrasMemo = letrasMemo.concat(aristasMemo);
         console.log('Letras memorizadas: ' + letrasMemo);
         var algsArray = getAlgsByArray(esquinasMemo);
-        console.log('Algoritmos : ' + algsArray);
+        console.log('Algoritmos : ' + algsArray.toString());
+        if(typeof Android != "indefined"){
+            Android.sendToArduino(algsArray.toString());
+        }
     });
 });
 

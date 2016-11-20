@@ -26,9 +26,8 @@ $(function() {
 
     $('#btn-connect').click(function() {
         if (typeof Android != "undefined") {
-            //Android.showToast("hola");
             if (conected) {
-                Arduino.disconnectArduino();
+                Android.disconnectArduino();
                 $(this).text('Conectar');
                 $('#bt-disconected').show();
                 $('#bt-conected').hide();
@@ -80,6 +79,7 @@ $(function() {
         console.log('Algoritmos : ' + algsArray);
         $('#algorythms-lbl').text(algsString);
         if (algsArray.length != 0) {
+            prepareAlgsForArduino(algsArray);
             var movsArr = makeMovementsArray(algsArray);
             cube._solve(movsArr);
         }
@@ -642,4 +642,35 @@ function getAlgsByLetter(letter, type) {
     return algs;
 }
 
+function sendAlgsToArduino(algsArray){
+    var algsStr = "";
+    for(var i in algsArray){
+        var move = algsArray[i];
+        switch(move){
+            case "F": algsStr += "F";break;
+            case "F'": algsStr += "f";break;
+            case "R": algsStr += "R";break;
+            case "R'": algsStr += "r";break;
+            case "L": algsStr += "L";break;
+            case "L'": algsStr += "l";break;
+            case "U": algsStr += "U";break;
+            case "U'": algsStr += "u";break;
+            case "D": algsStr += "D";break;
+            case "D'": algsStr += "d";break;
+            case "B": algsStr += "B";break;
+            case "B'": algsStr += "b";break;
+            case "F2": algsStr += "FF";break;
+            case "R2": algsStr += "RR";break;
+            case "L2": algsStr += "LL";break;
+            case "U2": algsStr += "UU";break;
+            case "D2": algsStr += "DD";break;
+            case "B2": algsStr += "BB";break;
+            default: break;    
+        }
+    }
+    console.log("algoritmos en arduino: " + algsStr);
+    if(typeof Android != "undefined"){
+        Android.sendToArduino(algsStr);
+    }
+}
 

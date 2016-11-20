@@ -383,6 +383,9 @@ YUI.add('rubik-simple', function(Y) {
         _doMovement: function(m, fromQueue) {
             if (this._moving) {
                 console.log('Se cancelo D:');
+                if(typeof Android != "undefined"){
+                    Android.moveCancelled(getMovementOriginalNotation(m));
+                }
                 return;//we cancel if there is some movement going on
             }
             var plane = this._plane,

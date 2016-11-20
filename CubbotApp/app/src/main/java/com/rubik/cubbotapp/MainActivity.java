@@ -45,22 +45,6 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new WebAppInterface(this), "Android");
-
-        ImageButton fab = (ImageButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "GitHub page", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                try {
-                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/orlando26/rubik?files=1"));
-                    startActivity(myIntent);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getApplicationContext(), "No application can handle this request."
-                            + " Please install a webbrowser",  Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     public class WebAppInterface {
@@ -87,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         public void disconnectArduino() {
             arduino.disconnect();
             Toast.makeText(mContext, "Se desconecto arduino", Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void moveCancelled(String move) {
+            Toast.makeText(mContext, "Se cancelo " + move, Toast.LENGTH_SHORT).show();
         }
     }
 
