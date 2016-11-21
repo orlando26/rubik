@@ -369,7 +369,6 @@ YUI.add('rubik-simple', function(Y) {
                 progress = progress.toString();
                 $('#solve-progress-bar').css('width', progress + '%');
                 console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
-                this._moving = false;
                 if (i == moves.length - 1) {
                     this._solving.cancel();
                     console.log('Solving finished');
