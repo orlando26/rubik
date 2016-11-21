@@ -354,7 +354,6 @@ YUI.add('rubik-simple', function(Y) {
             this._solving = Y.later(330, this, function() {
                 this._expectingTransition = true;
                 moves[i] && this._doMovement(moves[i], true);
-
                 var endTime = new Date();
                 var timeDiff = endTime - startTime;
                 timeDiff /= 1000;
@@ -370,6 +369,7 @@ YUI.add('rubik-simple', function(Y) {
                 progress = progress.toString();
                 $('#solve-progress-bar').css('width', progress + '%');
                 console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
+                this._moving = false;
                 if (i == moves.length - 1) {
                     this._solving.cancel();
                     console.log('Solving finished');
