@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         public void moveCancelled(String move) {
             Toast.makeText(mContext, "Se cancelo " + move, Toast.LENGTH_SHORT).show();
         }
+
+        @JavascriptInterface
+        public void refresh() {
+            webView.loadUrl("http://cubbot.azurewebsites.net");
+        }
     }
 
 

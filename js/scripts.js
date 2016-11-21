@@ -15,13 +15,21 @@ var aristasMemo = false;
 var algsString = "";
 var conected = false;
 $(function() {
-
     $('#rubik-link').hide();
     $('#bt-conected').hide();
     $('#save-state-btn').attr("disabled", true);
     $('#prevBtn').attr('disabled', true);
     $('#details-btn').click(function() {
         $('#myModal').modal();
+    });
+    
+    
+    $('#btn-refresh').click(function(){
+        if(typeof Android != "undefined"){
+            Android.refresh();
+        }else{
+            location.reload();
+        }
     });
 
     $('#btn-connect').click(function() {
