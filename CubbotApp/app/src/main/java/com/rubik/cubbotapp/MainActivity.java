@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         /** Show a toast from the web page */
         @JavascriptInterface
         public void sendToArduino(String algs) {
-            Toast.makeText(mContext, algs, Toast.LENGTH_SHORT).show();
+            arduino.write(algs);
         }
 
         @JavascriptInterface

@@ -353,26 +353,27 @@ YUI.add('rubik-simple', function(Y) {
             var i = 0;
             this._solving = Y.later(330, this, function() {
                 this._expectingTransition = true;
-                this._doMovement(moves[i]);
+                moves[i] && this._doMovement(moves[i], true);
+
                 var endTime = new Date();
-                    var timeDiff = endTime - startTime;
-                    timeDiff /= 1000;
-                    var seconds = Math.round(timeDiff % 60);
-                    var secondsStr = seconds < 10 ? '0' + seconds.toString() : seconds.toString();
-                    timeDiff = Math.floor(timeDiff / 60);
-                    var minutes = Math.round(timeDiff % 60);
-                    var minutesStr = minutes < 10 ? '0' + minutes.toString() : minutes.toString();
-                    var timeElapsed = minutesStr + ':' + secondsStr;
-                    $('#time-lbl').text(timeElapsed);
-                    $('#movement-lbl').text(getMovementOriginalNotation(moves[i]));
-                    progress = increment * i+1;
-                    progress = progress.toString();
-                    $('#solve-progress-bar').css('width', progress+'%');
+                var timeDiff = endTime - startTime;
+                timeDiff /= 1000;
+                var seconds = Math.round(timeDiff % 60);
+                var secondsStr = seconds < 10 ? '0' + seconds.toString() : seconds.toString();
+                timeDiff = Math.floor(timeDiff / 60);
+                var minutes = Math.round(timeDiff % 60);
+                var minutesStr = minutes < 10 ? '0' + minutes.toString() : minutes.toString();
+                var timeElapsed = minutesStr + ':' + secondsStr;
+                $('#time-lbl').text(timeElapsed);
+                $('#movement-lbl').text(getMovementOriginalNotation(moves[i]));
+                progress = increment * i + 1;
+                progress = progress.toString();
+                $('#solve-progress-bar').css('width', progress + '%');
                 console.log(i + 1 + ': ' + getMovementOriginalNotation(moves[i]));
                 if (i == moves.length - 1) {
                     this._solving.cancel();
                     console.log('Solving finished');
-                    $('#solve-progress-bar').css('width','100%');
+                    $('#solve-progress-bar').css('width', '100%');
                     $('#details-btn').show('clip');
                     console.log('Tiempo: ' + timeElapsed);
                 }
@@ -381,9 +382,10 @@ YUI.add('rubik-simple', function(Y) {
         },
 
         _doMovement: function(m, fromQueue) {
+            var canceledMove = false;
             if (this._moving) {
                 console.log('Se cancelo D:');
-                if(typeof Android != "undefined"){
+                if (typeof Android != "undefined") {
                     Android.moveCancelled(getMovementOriginalNotation(m));
                 }
                 return;//we cancel if there is some movement going on
