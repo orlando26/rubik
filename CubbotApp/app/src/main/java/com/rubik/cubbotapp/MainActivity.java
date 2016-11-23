@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new WebAppInterface(this), "Android");
     }
 
+    public void restartPage(){
+        webView.loadUrl("http://cubbot.azurewebsites.net");
+    }
+
     public class WebAppInterface {
         Context mContext;
 
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public void refresh() {
-            webView.loadUrl("http://cubbot.azurewebsites.net");
+            restartPage();
         }
     }
 

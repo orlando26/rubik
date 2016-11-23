@@ -321,6 +321,31 @@ YUI.add('rubik-simple', function(Y) {
                 this._doMovement(movement);
                 $('#movement-lbl').text(cubeMove);
                 console.log(cubeMove);
+                var arduinoTypeMove = "";
+                switch (cubeMove) {
+                    case "F": arduinoTypeMove = "F"; break;
+                    case "F'": arduinoTypeMove = "f"; break;
+                    case "R": arduinoTypeMove = "R"; break;
+                    case "R'": arduinoTypeMove = "r"; break;
+                    case "L": arduinoTypeMove = "L"; break;
+                    case "L'": arduinoTypeMove = "l"; break;
+                    case "U": arduinoTypeMove = "U"; break;
+                    case "U'": arduinoTypeMove = "u"; break;
+                    case "D": arduinoTypeMove = "D"; break;
+                    case "D'": arduinoTypeMove = "d"; break;
+                    case "B": arduinoTypeMove = "B"; break;
+                    case "B'": arduinoTypeMove = "b"; break;
+                    case "F2": arduinoTypeMove = "FF"; break;
+                    case "R2": arduinoTypeMove = "RR"; break;
+                    case "L2": arduinoTypeMove = "LL"; break;
+                    case "U2": arduinoTypeMove = "UU"; break;
+                    case "D2": arduinoTypeMove = "DD"; break;
+                    case "B2": arduinoTypeMove = "BB"; break;
+                    default: break;
+                }
+                if (typeof Android != "undefined") {
+                    Android.sendToArduino(arduinoTypeMove);
+                }
             }
 
         },
