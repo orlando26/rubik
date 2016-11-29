@@ -1,11 +1,11 @@
 #include<SoftwareSerial.h>
 SoftwareSerial bt(10, 11);
 int R[2] = {2, 3};
-int L[2] = {4, 5};
+int L[2] = {12, 13};
 int F[2] = {6, 7};
 int B[2] = {8, 9};
-int U[2] = {12, 13};
-int tiempo = 330;
+int U[2] = {4, 5};
+int tiempo = 2000;
 char movimiento;
 void setup(){
     Serial.begin(9600);
